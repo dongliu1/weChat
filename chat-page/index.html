@@ -8,10 +8,10 @@
     <style>
         *{margin:0;padding:0;}
         html,body{width:100%;height:100%;background-color: #e1e4e9;}
-        a{text-decoration: none;color:#000;}
-        li{list-style: none;padding:.5em;cursor: pointer;}
         .container{width:100%;height:100%}
-        .chat-contain{z-index:500;position: absolute;width:50em;height:46em;top:50%;left:50%;margin-top:-23em;margin-left:-25em;background-color: #CDD2D9;border:1px solid #C5C1C1;border-radius: 5px;}
+        .container a{text-decoration: none;color:#000;}
+        .container li{list-style: none;padding:.5em;cursor: pointer;}
+        .chat-window-contain{z-index:500;position: absolute;width:50em;height:46em;top:50%;left:50%;margin-top:-23em;margin-left:-25em;background-color: #CDD2D9;border:1px solid #C5C1C1;border-radius: 5px;}
         .user-list{position: absolute;left:0;top:0;bottom: 0;width:10em;border-right:1px solid #C5C1C1;}
         .message-windows{position:absolute;left:10em;top:0;bottom:0;right:0;background-color: #eee;}
         .message-windows>.message-list{width:100%;height:75%;border-bottom: 1px solid #C5C1C1;}
@@ -165,7 +165,7 @@
     <!-- chat-interface end -->
 
     <!-- chat-window start -->
-    <div class="chat-contain hidden">
+    <div class="chat-window-contain hidden">
         <!-- chat-window-user start -->
         <div class="user-list"></div>
         <!-- chat-window-user end -->
@@ -227,7 +227,7 @@
                 _init_login._userInfo=data;
                 var _html="<img style='width:2em;height:2em;margin:-5px 0;' src='"+data.img+"'/>";
                 $("#userinfo").prepend(_html);
-                _html="<img style='width:4em;height:4em;' src='"+data.img+"'/>";
+                _html="<img style='width:4em;height:4em;margin:0 .5em;border-radius: 4px;cursor: pointer;' src='"+data.img+"'/>";
                 if(data.img!=""){
                     $(".user-img>.default-user-img").after(_html);
                 }else{
@@ -271,7 +271,7 @@
 
     /*************聊天界面*************/
     var _init_chat={
-        _scopeId:"",            //聊天界面容器ID
+        _scopeId:"chat-interface-contain",            //聊天界面容器ID
         /***********聊天界面头部**************/
         _interface_head:{},
         /***********聊天界面好友列表**********/
@@ -282,7 +282,7 @@
 
     /*************聊天窗口*************/
     var _init_chat_windows={
-        _scopeId:"",            //聊天窗口容器ID
+        _scopeId:"chat-window-contain",            //聊天窗口容器ID
         /***********聊天窗口左部好友列表**********/
         _window_left:{},
         /***********聊天窗口右部头部菜单**********/
