@@ -1,8 +1,8 @@
 {
-  "account":"liuwei",
-  "username":"刘维",
-  "chanel":"C_liuwei",
-  "img":"img/img5.jpg",
+  "account":"guyi",
+  "username":"古羿",
+  "chanel":"C_guyi",
+  "img":"img/img9.jpg",
   "friends":[2,3,4,6,10],
   "publicChanel":[2,3,5,7]
 }
