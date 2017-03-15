@@ -6,11 +6,13 @@ var GLOBAL={
     goEasy:new GoEasy({
         appkey: '2f810cea-ef1c-42be-8e59-365d5b0a8fee'
     }),
-    BATH:"../"
+    BATH:"../",
+    isDrag:true
 };
 
 $(function () {
     _init_login._init();
+    //_init_chat._init_mousedown();
     _init_chat._init_draggable();
 });
 
@@ -78,13 +80,174 @@ var _init_chat={
     _init:function () {
 
     },
+    _init_mousedown:function () {
+        var _cursor;
+        var _scope=$("."+_init_chat._scopeId);
+        var _offset;
+        var _height;
+        var _width;
+        $(".chat-interface-resize").on("mousedown",function () {
+            _cursor=$(this).css("cursor");
+            _offset={
+                top:parseInt(_scope.css("top").split("px")[0]),
+                right:parseInt(_scope.css("right").split("px")[0]),
+                bottom:parseInt(_scope.css("bottom").split("px")[0]),
+                left:parseInt(_scope.css("left").split("px")[0])
+            };
+            _height=_scope.height();
+            _width=_scope.width();
+            $(this).on("mousemove",function (e) {
+                console.log("aaaaa",_cursor);
+                switch (_cursor){
+                    case "n-resize":
+                        _scope.draggable( "option", "axis", "y" );
+                        if($(this).hasClass("chat-top-line")){
+                            _scope.css({
+                                "height":(_height+_offset.top-e.pageY)+"px"
+                            });
+                        }else{
+                            _scope.css({
+                                "height":(e.pageY-_offset.top)+"px"
+                            });
+                        }
+                        break;
+                    case "e-resize":
+                        console.log(_width,_offset.left,e.pageX);
+                        _scope.draggable( "option", "axis", "x" );
+                        if($(this).hasClass("chat-left-line")){
+                            _scope.css({
+                                "width":(_width+_offset.left-e.pageX)+"px"
+                            });
+                        }else{
+                            _scope.css({
+                                "width":(e.pageX-_offset.left)+"px"
+                            });
+                        }
+                        break;
+                    case "nw-resize":
+                        _scope.draggable( "option", "axis", "xy" );
+                        break;
+                    case "ne-resize":
+                        _scope.draggable( "option", "axis", "xy" );
+                        break;
+                    case "sw-resize":
+                        _scope.draggable( "option", "axis", "xy" );
+                        break;
+                    case "se-resize":
+                        _scope.draggable( "option", "axis", "xy" );
+                        break;
+                    default:
+                        break;
+                }
+            })
+        }).on("mouseup",function () {
+
+        });
+        /*var _cursor;
+        var _offset;
+        var _scope=$("."+_init_chat._scopeId);
+        var _coffset;
+        var _height;
+        var _width;
+        $(".chat-interface-resize").draggable({
+            containment:"body",
+            start:function (evt, hlp) {
+                _cursor=$(this).css("cursor");
+                _offset=_scope.offset();
+                _coffset=hlp.offset;
+                _height=_scope.height();
+                _width=_scope.width();
+            },
+            drag:function (evt, hlp) {
+                switch (_cursor){
+                    case "n-resize":
+                        var _cur_height=_scope.height();
+                        hlp.offset.left=_coffset.left;
+                        if(_cur_height<_scope.css("max-height").split("px")[0]&&_cur_height>_scope.css("min-height").split("px")[0]){
+                            if(e.pageY-_offset.top>10){
+                                _scope.height(e.pageY-_offset.top());
+                            }else{
+                                _scope.css("top",e.pageY);
+                                _scope.height(_height+(_offset.top()-e.pageY));
+                            }
+                        }else{
+                            if(e.pageY-_offset.top>10){
+                                hlp.offset.top=_offset.top()+_scope.height();
+                            }else{
+                                hlp.offset.top=_scope.css("top");
+                            }
+                        }
+                        break;
+                    case "s-resize":
+                        var _cur_width=_scope.width();
+                        hlp.offset.top=_coffset.top;
+                        if(_cur_width<_scope.css("max-width").split("px")[0]&&_cur_height>_scope.css("min-width").split("px")[0]){
+                            if(e.pageX-_offset.left>10){
+                                _scope.width(_width+(e.pageX-_offset.left()));
+                            }else{
+                                _scope.css("right",e.pageX);
+                                _scope.width(_offset.left()-e.pageX);
+                            }
+                        }else{
+                            if(e.pageX-_offset.left>10){
+                                hlp.offset.left=_offset.left()+_scope.width();
+                            }else{
+                                hlp.offset.left=_scope.css("left");
+                            }
+                        }
+                        break;
+                    case "nw-resize":
+                        break;
+                    case "ne-resize":
+                        break;
+                    case "sw-resize":
+                        break;
+                    case "se-resize":
+                        break;
+                    default:
+                        break;
+                }
+            }
+        })*/
+    },
     _init_draggable:function () {
         $("."+_init_chat._scopeId).draggable({
             containment:"body",
+            start:function () {
+                
+            },
             stop:function (evt, hlp) {
-                if(hlp.offset.top<10){
-                    $(this).slideUp();
-                }
+                $(document).unbind("mousemove");
+                var _contain={
+                    width:$(this).width(),
+                    height:$(this).height(),
+                    left:hlp.offset.left,
+                    top:hlp.offset.top
+                };
+                _init_chat._init_mousemove(_contain)
+            }
+        });
+    },
+    _init_mousemove:function (param) {
+        $(document).mousemove(function(e){
+            var _scope=$("."+_init_chat._scopeId);
+            var _offset=_scope.offset();
+            if($.isArray(param)){
+                var _gapx=e.pageX-_start_offset.left;
+                var _gapy=e.pageY-_offset.top;
+                $.each(param,function (p,pdata){
+                    if(pdata=="width"){
+                        _scope.width=0
+                    }
+                });
+                return false;
+            }
+            if(_scope.is(":hidden")){
+                if(e.pageY<40&&e.pageX>param.left&&e.pageX<param.left+param.width)
+                    _scope.slideDown();
+            }else{
+                if(_offset.top<30&&(e.pageY>param.height+_offset.top||e.pageX<_offset.left||e.pageX>_offset.left+param.width))
+                    _scope.slideUp();
             }
         });
     },
