@@ -1,0 +1,74 @@
+[class^="icon-"], [class*=" icon-"] {
+  font-family: 'sk';
+  font-style: normal;
+  font-weight: normal;
+ 
+  /* fix buttons height */
+  line-height: 1em;
+ 
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+}
+ 
+.icon-daohang { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe800;&nbsp;'); }
+.icon-qushitu { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe864;&nbsp;'); }
+.icon-sanbutu { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe865;&nbsp;'); }
+.icon-yujing { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe866;&nbsp;'); }
+.icon-tuichu { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe867;&nbsp;'); }
+.icon-yonghuguanli- { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe868;&nbsp;'); }
+.icon-shuaxin { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe869;&nbsp;'); }
+.icon-zuixiaohua { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe86a;&nbsp;'); }
+.icon-zuixiaohua_ { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe86b;&nbsp;'); }
+.icon-zuidahua { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe86c;&nbsp;'); }
+.icon-guanbi { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe86d;&nbsp;'); }
+.icon-pingtaigaikuang { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe86e;&nbsp;'); }
+.icon-shujukuguanli { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe86f;&nbsp;'); }
+.icon-cedianguanli { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe870;&nbsp;'); }
+.icon-shujuzhuanfa { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe871;&nbsp;'); }
+.icon-jingbaoxiaoxi { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe872;&nbsp;'); }
+.icon-xiaoxidingyue { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe873;&nbsp;'); }
+.icon-xiaoxiliebiao { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe874;&nbsp;'); }
+.icon-xiaoxijingbao { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe875;&nbsp;'); }
+.icon-yujingshezhi { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe876;&nbsp;'); }
+.icon-yujingshezhi_ { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe877;&nbsp;'); }
+.icon-luojizutai { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe878;&nbsp;'); }
+.icon-shujufenxi { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe879;&nbsp;'); }
+.icon-fenshiqushitu { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe87a;&nbsp;'); }
+.icon-lianghuafenxi { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe87b;&nbsp;'); }
+.icon-shujuchaxun { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe87c;&nbsp;'); }
+.icon-xiangguanxingfenxi { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe87d;&nbsp;'); }
+.icon-bifenxi { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe87e;&nbsp;'); }
+.icon-yonghuxinxi { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe87f;&nbsp;'); }
+.icon-yonghuquanxian { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe880;&nbsp;'); }
+.icon-yujingtongji { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe881;&nbsp;'); }
+.icon-zhuye { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe882;&nbsp;'); }
+.icon-diyiye { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe883;&nbsp;'); }
+.icon-shangyiye { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe884;&nbsp;'); }
+.icon-xiayiye { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe885;&nbsp;'); }
+.icon-moye { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe886;&nbsp;'); }
+.icon-shanchu { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe887;&nbsp;'); }
+.icon-daoru { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe888;&nbsp;'); }
+.icon-daochu { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe889;&nbsp;'); }
+.icon-kaiguandingyi { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe88a;&nbsp;'); }
+.icon-bianji { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe88b;&nbsp;'); }
+.icon-jiansuo { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe88c;&nbsp;'); }
+.icon-jiansuotiaojian { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe88d;&nbsp;'); }
+.icon-zhishikuguanli { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe88e;&nbsp;'); }
+.icon-jianshi { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe88f;&nbsp;'); }
+.icon-xinzeng { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe890;&nbsp;'); }
+.icon-baocunwenjian { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe891;&nbsp;'); }
+.icon-dakaiwenjian { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe892;&nbsp;'); }
+.icon-shanggeshijianduan { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe893;&nbsp;'); }
+.icon-xiageshijianduan { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe894;&nbsp;'); }
+.icon-fenduanxianshi { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe895;&nbsp;'); }
+.icon-gaodu { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe896;&nbsp;'); }
+.icon-kuandu { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe897;&nbsp;'); }
+.icon-daochutupian { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe898;&nbsp;'); }
+.icon-shebeigengming { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe899;&nbsp;'); }
+.icon-bianjicedian { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe89a;&nbsp;'); }
+.icon-shezhiqianhouzhui { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe89b;&nbsp;'); }
+.icon-wenjianjia { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe89c;&nbsp;'); }
+.icon-quanxianguanli { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe89d;&nbsp;'); }
+.icon-fuzhi { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe89e;&nbsp;'); }
+.icon-shanchuchonfucedian { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe8a0;&nbsp;'); }
+.icon-tuichu_ { *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '&#xe8a1;&nbsp;'); }

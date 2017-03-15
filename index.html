@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>微聊</title>
+    <link rel="stylesheet" href="chat-page/libs/bootstrap/css/bootstrap.min.css">
+    <style>
+        *{margin:0;padding:0;}
+        html,body,.contain{width: 100%;height:100%;}
+        .contain{background-color: #e1e4e9;}
+        .web-icon{position: absolute;top:5em;left:5em;}
+        .web-icon>span{font-size: 5em;display: inline-block;color:#716565;}
+        .login-page{width:26em;height:12em;position:absolute;top:50%;left:50%;margin-left:-13em;margin-top:-6em;background-color: #313030;color: #fff;border-radius: 5px;}
+    </style>
+</head>
+<body onkeydown="init_before_login(event)">
+<div class="contain">
+    <div class="web-icon">
+        <span>微聊</span>
+    </div>
+    <div class="login-page">
+        <div class="row" style="margin-top:1em;">
+            <div class="col-sm-3 text-center">用户</div>
+            <div class="col-sm-9 text-left">
+                <div class="input-group">
+                    <input id="username" type="text" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin:1em -15px;">
+            <div class="col-sm-3 text-center">密码</div>
+            <div class="col-sm-9 text-left">
+                <div class="input-group">
+                    <input id="password" type="password" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-7">
+                <button class="btn btn-success btn-block" onclick="init_login()">登录</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-9">
+                <span id="error-tips" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="chat-page/libs/jquery/jQuery-2.1.4.min.js"></script>
+<script src="chat-page/libs/bootstrap/js/bootstrap.min.js"></script>
+<script src="chat-api/api.js"></script>
+<script>
+    var BATH="";
+
+    function init_before_login(event) {
+        if(event.keyCode==13){
+            init_login();
+        }
+    }
+
+    function init_login() {
+        var _username=$.trim($("#username").val());
+        var _password=$.trim($("#password").val());
+        if(_username==""){
+            $("#error-tips").text("用户名不能为空");
+            return false;
+        }
+        if(_password==""){
+            $("#error-tips").text("密码不能为空");
+            return false;
+        }
+        postLogin(BATH,_username,_password,function (data) {
+            if(!data){
+                $("#error-tips").text("用户名或密码错误！");
+                return false;
+            }
+            console.log(data);
+            location.href="chat-page/index.html?userId="+data.id;
+        });
+    }
+</script>
+</html>

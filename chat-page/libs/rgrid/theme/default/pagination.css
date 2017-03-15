@@ -1,0 +1,31 @@
+.rgridPagination{margin:5px 0;white-space:nowrap}
+.rgridPagination .totalCountLabel{display:inline-block;margin:0 5px 0 0;padding:1px 0 0 0;line-height:1.5;vertical-align:top}
+.rgridPagination .totalCountLabel span{color:#b00;font-weight:700}
+.rgridPagination .pageList{display:inline-block;margin:0 5px 0 0;padding:0;list-style:none}
+.rgridPagination .pageList li{display:inline-block;margin:0 2px;padding:0 6px;background:#fff;border:1px solid #ccc;line-height:1.5;vertical-align:top}
+.rgridPagination .pageList li.active{background:0 0;padding-top:1px;border:0}
+.rgridPagination .pageList li.disable a{color:#333;cursor:default}
+.rgridPagination .pageList li.disable{background:#efefef}
+.rgridPagination .pageList li.disable a{color:#333;cursor:default}
+.rgridPagination .pageList li a{color:#b00;text-align:center;cursor:pointer}
+.rgridPagination .pageList li a.head{}
+.rgridPagination .pageList li a.headDisable{}
+.rgridPagination .pageList li a.prev{}
+.rgridPagination .pageList li a.prevDisable{}
+.rgridPagination .pageList li a.next{}
+.rgridPagination .pageList li a.nextDisable{}
+.rgridPagination .pageList li a.tail{}
+.rgridPagination .pageList li a.tailDisable{}
+.rgridPagination .pageList li a.current{}
+.rgridPagination .pageList li a.skip{}
+.rgridPagination .limit{display:inline-block;line-height:1.5;vertical-align:top}
+.rgridPagination .limit select{border:1px solid #ccc;padding:1px;width:auto;height:auto;margin:0;line-height:1.5;font-size:1em}
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,1413 @@
+/*** spacings ***/
+/*** font size css **/
+/*flexible width*/
+/*flexible height*/
+/*setting font size line height and color together*/
+/**
+ * SyntaxHighlighter
+ * http://alexgorbatchev.com/SyntaxHighlighter
+ *
+ * SyntaxHighlighter is donationware. If you are using it, please donate.
+ * http://alexgorbatchev.com/SyntaxHighlighter/donate.html
+ *
+ * @version
+ * 3.0.83 (July 02 2010)
+ * 
+ * @copyright
+ * Copyright (C) 2004-2010 Alex Gorbatchev.
+ *
+ * @license
+ * Dual licensed under the MIT and GPL licenses.
+ */
+.syntaxhighlighter a,
+.syntaxhighlighter div,
+.syntaxhighlighter code,
+.syntaxhighlighter table,
+.syntaxhighlighter table td,
+.syntaxhighlighter table tr,
+.syntaxhighlighter table tbody,
+.syntaxhighlighter table thead,
+.syntaxhighlighter table caption,
+.syntaxhighlighter textarea {
+  -moz-border-radius: 0 0 0 0 !important;
+  -webkit-border-radius: 0 0 0 0 !important;
+  background: none !important;
+  border: 0 !important;
+  bottom: auto !important;
+  float: none !important;
+  height: auto !important;
+  left: auto !important;
+  line-height: 1.1em !important;
+  margin: 0 !important;
+  outline: 0 !important;
+  overflow: visible !important;
+  padding: 0 !important;
+  position: static !important;
+  right: auto !important;
+  text-align: left !important;
+  top: auto !important;
+  vertical-align: baseline !important;
+  width: auto !important;
+  box-sizing: content-box !important;
+  font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace !important;
+  font-weight: normal !important;
+  font-style: normal !important;
+  font-size: 1em !important;
+  min-height: inherit !important;
+  min-height: auto !important;
+}
+.syntaxhighlighter {
+  width: 100% !important;
+  margin: 1em 0 1em 0 !important;
+  position: relative !important;
+  overflow: auto !important;
+  font-size: 1em !important;
+}
+.syntaxhighlighter.source {
+  overflow: hidden !important;
+}
+.syntaxhighlighter .bold {
+  font-weight: bold !important;
+}
+.syntaxhighlighter .italic {
+  font-style: italic !important;
+}
+.syntaxhighlighter .line {
+  white-space: pre !important;
+}
+.syntaxhighlighter table {
+  width: 100% !important;
+}
+.syntaxhighlighter table caption {
+  text-align: left !important;
+  padding: .5em 0 0.5em 1em !important;
+}
+.syntaxhighlighter table td.code {
+  width: 100% !important;
+}
+.syntaxhighlighter table td.code .container {
+  position: relative !important;
+}
+.syntaxhighlighter table td.code .container textarea {
+  box-sizing: border-box !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  border: none !important;
+  background: white !important;
+  padding-left: 1em !important;
+  overflow: hidden !important;
+  white-space: pre !important;
+}
+.syntaxhighlighter table td.gutter .line {
+  text-align: right !important;
+  padding: 0 0.5em 0 1em !important;
+}
+.syntaxhighlighter table td.code .line {
+  padding: 0 1em !important;
+}
+.syntaxhighlighter.nogutter td.code .container textarea,
+.syntaxhighlighter.nogutter td.code .line {
+  padding-left: 0em !important;
+}
+.syntaxhighlighter.show {
+  display: block !important;
+}
+.syntaxhighlighter.collapsed table {
+  display: none !important;
+}
+.syntaxhighlighter.collapsed .toolbar {
+  padding: 0.1em 0.8em 0em 0.8em !important;
+  font-size: 1em !important;
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+}
+.syntaxhighlighter.collapsed .toolbar span {
+  display: inline !important;
+  margin-right: 1em !important;
+}
+.syntaxhighlighter.collapsed .toolbar span a {
+  padding: 0 !important;
+  display: none !important;
+}
+.syntaxhighlighter.collapsed .toolbar span a.expandSource {
+  display: inline !important;
+}
+.syntaxhighlighter .toolbar {
+  position: absolute !important;
+  right: 1px !important;
+  top: 1px !important;
+  width: 11px !important;
+  height: 11px !important;
+  font-size: 10px !important;
+  z-index: 10 !important;
+}
+.syntaxhighlighter .toolbar span.title {
+  display: inline !important;
+}
+.syntaxhighlighter .toolbar a {
+  display: block !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  padding-top: 1px !important;
+}
+.syntaxhighlighter .toolbar a.expandSource {
+  display: none !important;
+}
+.syntaxhighlighter.ie {
+  font-size: .9em !important;
+  padding: 1px 0 1px 0 !important;
+}
+.syntaxhighlighter.ie .toolbar {
+  line-height: 8px !important;
+}
+.syntaxhighlighter.ie .toolbar a {
+  padding-top: 0px !important;
+}
+.syntaxhighlighter.printing .line.alt1 .content,
+.syntaxhighlighter.printing .line.alt2 .content,
+.syntaxhighlighter.printing .line.highlighted .number,
+.syntaxhighlighter.printing .line.highlighted.alt1 .content,
+.syntaxhighlighter.printing .line.highlighted.alt2 .content {
+  background: none !important;
+}
+.syntaxhighlighter.printing .line .number {
+  color: #bbbbbb !important;
+}
+.syntaxhighlighter.printing .line .content {
+  color: black !important;
+}
+.syntaxhighlighter.printing .toolbar {
+  display: none !important;
+}
+.syntaxhighlighter.printing a {
+  text-decoration: none !important;
+}
+.syntaxhighlighter.printing .plain,
+.syntaxhighlighter.printing .plain a {
+  color: black !important;
+}
+.syntaxhighlighter.printing .comments,
+.syntaxhighlighter.printing .comments a {
+  color: #008200 !important;
+}
+.syntaxhighlighter.printing .string,
+.syntaxhighlighter.printing .string a {
+  color: blue !important;
+}
+.syntaxhighlighter.printing .keyword {
+  color: #006699 !important;
+  font-weight: bold !important;
+}
+.syntaxhighlighter.printing .preprocessor {
+  color: gray !important;
+}
+.syntaxhighlighter.printing .variable {
+  color: #aa7700 !important;
+}
+.syntaxhighlighter.printing .value {
+  color: #009900 !important;
+}
+.syntaxhighlighter.printing .functions {
+  color: #ff1493 !important;
+}
+.syntaxhighlighter.printing .constants {
+  color: #0066cc !important;
+}
+.syntaxhighlighter.printing .script {
+  font-weight: bold !important;
+}
+.syntaxhighlighter.printing .color1,
+.syntaxhighlighter.printing .color1 a {
+  color: gray !important;
+}
+.syntaxhighlighter.printing .color2,
+.syntaxhighlighter.printing .color2 a {
+  color: #ff1493 !important;
+}
+.syntaxhighlighter.printing .color3,
+.syntaxhighlighter.printing .color3 a {
+  color: red !important;
+}
+.syntaxhighlighter.printing .break,
+.syntaxhighlighter.printing .break a {
+  color: black !important;
+}
+.syntaxhighlighter {
+  background-color: white !important;
+}
+.syntaxhighlighter .line.alt1 {
+  background-color: white !important;
+}
+.syntaxhighlighter .line.alt2 {
+  background-color: white !important;
+}
+.syntaxhighlighter .line.highlighted.alt1,
+.syntaxhighlighter .line.highlighted.alt2 {
+  background-color: #e0e0e0 !important;
+}
+.syntaxhighlighter .line.highlighted.number {
+  color: black !important;
+}
+.syntaxhighlighter table caption {
+  color: black !important;
+}
+.syntaxhighlighter .gutter {
+  color: #afafaf !important;
+}
+.syntaxhighlighter .gutter .line {
+  border-right: 3px solid #6ce26c !important;
+}
+.syntaxhighlighter .gutter .line.highlighted {
+  background-color: #6ce26c !important;
+  color: white !important;
+}
+.syntaxhighlighter.printing .line .content {
+  border: none !important;
+}
+.syntaxhighlighter.collapsed {
+  overflow: visible !important;
+}
+.syntaxhighlighter.collapsed .toolbar {
+  color: blue !important;
+  background: white !important;
+  border: 1px solid #6ce26c !important;
+}
+.syntaxhighlighter.collapsed .toolbar a {
+  color: blue !important;
+}
+.syntaxhighlighter.collapsed .toolbar a:hover {
+  color: red !important;
+}
+.syntaxhighlighter .toolbar {
+  color: white !important;
+  background: #6ce26c !important;
+  border: none !important;
+}
+.syntaxhighlighter .toolbar a {
+  color: white !important;
+}
+.syntaxhighlighter .toolbar a:hover {
+  color: black !important;
+}
+.syntaxhighlighter .plain,
+.syntaxhighlighter .plain a {
+  color: black !important;
+}
+.syntaxhighlighter .comments,
+.syntaxhighlighter .comments a {
+  color: #008200 !important;
+}
+.syntaxhighlighter .string,
+.syntaxhighlighter .string a {
+  color: blue !important;
+}
+.syntaxhighlighter .keyword {
+  color: #006699 !important;
+}
+.syntaxhighlighter .preprocessor {
+  color: gray !important;
+}
+.syntaxhighlighter .variable {
+  color: #aa7700 !important;
+}
+.syntaxhighlighter .value {
+  color: #009900 !important;
+}
+.syntaxhighlighter .functions {
+  color: #ff1493 !important;
+}
+.syntaxhighlighter .constants {
+  color: #0066cc !important;
+}
+.syntaxhighlighter .script {
+  font-weight: bold !important;
+  color: #006699 !important;
+  background-color: none !important;
+}
+.syntaxhighlighter .color1,
+.syntaxhighlighter .color1 a {
+  color: gray !important;
+}
+.syntaxhighlighter .color2,
+.syntaxhighlighter .color2 a {
+  color: #ff1493 !important;
+}
+.syntaxhighlighter .color3,
+.syntaxhighlighter .color3 a {
+  color: red !important;
+}
+.syntaxhighlighter .keyword {
+  font-weight: bold !important;
+}
+/**
+ * SyntaxHighlighter
+ * http://alexgorbatchev.com/SyntaxHighlighter
+ *
+ * SyntaxHighlighter is donationware. If you are using it, please donate.
+ * http://alexgorbatchev.com/SyntaxHighlighter/donate.html
+ *
+ * @version
+ * 3.0.83 (July 02 2010)
+ * 
+ * @copyright
+ * Copyright (C) 2004-2010 Alex Gorbatchev.
+ *
+ * @license
+ * Dual licensed under the MIT and GPL licenses.
+ */
+.syntaxhighlighter a,
+.syntaxhighlighter div,
+.syntaxhighlighter code,
+.syntaxhighlighter table,
+.syntaxhighlighter table td,
+.syntaxhighlighter table tr,
+.syntaxhighlighter table tbody,
+.syntaxhighlighter table thead,
+.syntaxhighlighter table caption,
+.syntaxhighlighter textarea {
+  -moz-border-radius: 0 0 0 0 !important;
+  -webkit-border-radius: 0 0 0 0 !important;
+  background: none !important;
+  border: 0 !important;
+  bottom: auto !important;
+  float: none !important;
+  height: auto !important;
+  left: auto !important;
+  line-height: 1.1em !important;
+  margin: 0 !important;
+  outline: 0 !important;
+  overflow: visible !important;
+  padding: 0 !important;
+  position: static !important;
+  right: auto !important;
+  text-align: left !important;
+  top: auto !important;
+  vertical-align: baseline !important;
+  width: auto !important;
+  box-sizing: content-box !important;
+  font-family: "Consolas", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace !important;
+  font-weight: normal !important;
+  font-style: normal !important;
+  font-size: 1em !important;
+  min-height: inherit !important;
+  min-height: auto !important;
+}
+.syntaxhighlighter {
+  width: 100% !important;
+  margin: 1em 0 1em 0 !important;
+  position: relative !important;
+  overflow: auto !important;
+  overflow-y: hidden !important;
+  font-size: 1em !important;
+}
+.syntaxhighlighter.source {
+  overflow: hidden !important;
+}
+.syntaxhighlighter .bold {
+  font-weight: bold !important;
+}
+.syntaxhighlighter .italic {
+  font-style: italic !important;
+}
+.syntaxhighlighter .line {
+  white-space: pre !important;
+}
+.syntaxhighlighter table {
+  width: 100% !important;
+}
+.syntaxhighlighter table caption {
+  text-align: left !important;
+  padding: .5em 0 0.5em 1em !important;
+}
+.syntaxhighlighter table td.code {
+  width: 100% !important;
+}
+.syntaxhighlighter table td.code .container {
+  position: relative !important;
+}
+.syntaxhighlighter table td.code .container textarea {
+  box-sizing: border-box !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  border: none !important;
+  background: white !important;
+  padding-left: 1em !important;
+  overflow: hidden !important;
+  white-space: pre !important;
+}
+.syntaxhighlighter table td.gutter .line {
+  text-align: right !important;
+  padding: 0 0.5em 0 1em !important;
+}
+.syntaxhighlighter table td.code .line {
+  padding: 0 1em !important;
+}
+.syntaxhighlighter.nogutter td.code .container textarea,
+.syntaxhighlighter.nogutter td.code .line {
+  padding-left: 0em !important;
+}
+.syntaxhighlighter.show {
+  display: block !important;
+}
+.syntaxhighlighter.collapsed table {
+  display: none !important;
+}
+.syntaxhighlighter.collapsed .toolbar {
+  padding: 0.1em 0.8em 0em 0.8em !important;
+  font-size: 1em !important;
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+}
+.syntaxhighlighter.collapsed .toolbar span {
+  display: inline !important;
+  margin-right: 1em !important;
+}
+.syntaxhighlighter.collapsed .toolbar span a {
+  padding: 0 !important;
+  display: none !important;
+}
+.syntaxhighlighter.collapsed .toolbar span a.expandSource {
+  display: inline !important;
+}
+.syntaxhighlighter .toolbar {
+  position: absolute !important;
+  right: 1px !important;
+  top: 1px !important;
+  width: 11px !important;
+  height: 11px !important;
+  font-size: 10px !important;
+  z-index: 10 !important;
+}
+.syntaxhighlighter .toolbar span.title {
+  display: inline !important;
+}
+.syntaxhighlighter .toolbar a {
+  display: block !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  padding-top: 1px !important;
+}
+.syntaxhighlighter .toolbar a.expandSource {
+  display: none !important;
+}
+.syntaxhighlighter.ie {
+  font-size: .9em !important;
+  padding: 1px 0 1px 0 !important;
+}
+.syntaxhighlighter.ie .toolbar {
+  line-height: 8px !important;
+}
+.syntaxhighlighter.ie .toolbar a {
+  padding-top: 0px !important;
+}
+.syntaxhighlighter.printing .line.alt1 .content,
+.syntaxhighlighter.printing .line.alt2 .content,
+.syntaxhighlighter.printing .line.highlighted .number,
+.syntaxhighlighter.printing .line.highlighted.alt1 .content,
+.syntaxhighlighter.printing .line.highlighted.alt2 .content {
+  background: none !important;
+}
+.syntaxhighlighter.printing .line .number {
+  color: #bbbbbb !important;
+}
+.syntaxhighlighter.printing .line .content {
+  color: black !important;
+}
+.syntaxhighlighter.printing .toolbar {
+  display: none !important;
+}
+.syntaxhighlighter.printing a {
+  text-decoration: none !important;
+}
+.syntaxhighlighter.printing .plain,
+.syntaxhighlighter.printing .plain a {
+  color: black !important;
+}
+.syntaxhighlighter.printing .comments,
+.syntaxhighlighter.printing .comments a {
+  color: #008200 !important;
+}
+.syntaxhighlighter.printing .string,
+.syntaxhighlighter.printing .string a {
+  color: blue !important;
+}
+.syntaxhighlighter.printing .keyword {
+  color: #006699 !important;
+  font-weight: bold !important;
+}
+.syntaxhighlighter.printing .preprocessor {
+  color: gray !important;
+}
+.syntaxhighlighter.printing .variable {
+  color: #aa7700 !important;
+}
+.syntaxhighlighter.printing .value {
+  color: #009900 !important;
+}
+.syntaxhighlighter.printing .functions {
+  color: #ff1493 !important;
+}
+.syntaxhighlighter.printing .constants {
+  color: #0066cc !important;
+}
+.syntaxhighlighter.printing .script {
+  font-weight: bold !important;
+}
+.syntaxhighlighter.printing .color1,
+.syntaxhighlighter.printing .color1 a {
+  color: gray !important;
+}
+.syntaxhighlighter.printing .color2,
+.syntaxhighlighter.printing .color2 a {
+  color: #ff1493 !important;
+}
+.syntaxhighlighter.printing .color3,
+.syntaxhighlighter.printing .color3 a {
+  color: red !important;
+}
+.syntaxhighlighter.printing .break,
+.syntaxhighlighter.printing .break a {
+  color: black !important;
+}
+/*** include libraries css ***/
+/****** share icon css start ******/
+.rrssb-buttons {
+  box-sizing: border-box;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  height: 36px;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+.rrssb-buttons li {
+  box-sizing: border-box;
+  float: left;
+  height: 100%;
+  line-height: 13px;
+  list-style: none;
+  margin: 0;
+  padding: 0 2px;
+}
+.rrssb-buttons li.rrssb-email a {
+  background-color: #0a88ff;
+}
+.rrssb-buttons li.rrssb-email a:hover {
+  background-color: #006ed6;
+}
+.rrssb-buttons li.rrssb-facebook a {
+  background-color: #306199;
+}
+.rrssb-buttons li.rrssb-facebook a:hover {
+  background-color: #244872;
+}
+.rrssb-buttons li.rrssb-tumblr a {
+  background-color: #32506d;
+}
+.rrssb-buttons li.rrssb-tumblr a:hover {
+  background-color: #22364a;
+}
+.rrssb-buttons li.rrssb-linkedin a {
+  background-color: #007bb6;
+}
+.rrssb-buttons li.rrssb-linkedin a:hover {
+  background-color: #005983;
+}
+.rrssb-buttons li.rrssb-twitter a {
+  background-color: #26c4f1;
+}
+.rrssb-buttons li.rrssb-twitter a:hover {
+  background-color: #0eaad6;
+}
+.rrssb-buttons li.rrssb-googleplus a {
+  background-color: #e93f2e;
+}
+.rrssb-buttons li.rrssb-googleplus a:hover {
+  background-color: #ce2616;
+}
+.rrssb-buttons li.rrssb-youtube a {
+  background-color: #df1c31;
+}
+.rrssb-buttons li.rrssb-youtube a:hover {
+  background-color: #b21627;
+}
+.rrssb-buttons li.rrssb-reddit a {
+  background-color: #8bbbe3;
+}
+.rrssb-buttons li.rrssb-reddit a:hover {
+  background-color: #62a3d9;
+}
+.rrssb-buttons li.rrssb-pinterest a {
+  background-color: #b81621;
+}
+.rrssb-buttons li.rrssb-pinterest a:hover {
+  background-color: #8a1119;
+}
+.rrssb-buttons li.rrssb-pocket a {
+  background-color: #ed4054;
+}
+.rrssb-buttons li.rrssb-pocket a:hover {
+  background-color: #e4162d;
+}
+.rrssb-buttons li.rrssb-github a {
+  background-color: #444;
+}
+.rrssb-buttons li.rrssb-github a:hover {
+  background-color: #2b2b2b;
+}
+.rrssb-buttons li.rrssb-instagram a {
+  background-color: #517fa4;
+}
+.rrssb-buttons li.rrssb-instagram a:hover {
+  background-color: #406582;
+}
+.rrssb-buttons li.rrssb-delicious a {
+  background-color: #0B79E5;
+}
+.rrssb-buttons li.rrssb-delicious a:hover {
+  background-color: #095fb4;
+}
+.rrssb-buttons li.rrssb-vk a {
+  background-color: #4d71a9;
+}
+.rrssb-buttons li.rrssb-vk a:hover {
+  background-color: #3d5a86;
+}
+.rrssb-buttons li.rrssb-hackernews a {
+  background-color: #f60;
+}
+.rrssb-buttons li.rrssb-hackernews a:hover {
+  background-color: #cc5200;
+}
+.rrssb-buttons li a {
+  background-color: #ccc;
+  border-radius: 2px;
+  box-sizing: border-box;
+  display: block;
+  font-size: 11px;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 700;
+  height: 100%;
+  padding: 11px 7px 12px 27px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  -webkit-transition: background-color 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
+  width: 100%;
+}
+.rrssb-buttons li a .rrssb-icon {
+  display: block;
+  left: 10px;
+  padding-top: 9px;
+  position: absolute;
+  top: 0;
+  width: 10%;
+}
+.rrssb-buttons li a .rrssb-icon svg {
+  height: 17px;
+  width: 17px;
+}
+.rrssb-buttons li a .rrssb-icon svg path,
+.rrssb-buttons li a .rrssb-icon svg polygon {
+  fill: #fff;
+}
+.rrssb-buttons li a .rrssb-text {
+  color: #fff;
+}
+.rrssb-buttons li a:active {
+  box-shadow: inset 1px 3px 15px 0 rgba(22, 0, 0, 0.25);
+}
+.rrssb-buttons li.small a {
+  padding: 0;
+}
+.rrssb-buttons li.small a .rrssb-icon {
+  left: auto;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+  top: auto;
+  width: 100%;
+}
+.rrssb-buttons li.small a .rrssb-text {
+  visibility: hidden;
+}
+.rrssb-buttons.large-format,
+.rrssb-buttons.large-format li {
+  height: auto;
+}
+.rrssb-buttons.large-format li:first-child:nth-last-child(1) a {
+  font-size: 20px;
+  font-size: 4vw;
+}
+.rrssb-buttons.large-format li:first-child:nth-last-child(2) a,
+.rrssb-buttons.large-format li:first-child:nth-last-child(2) ~ li a {
+  font-size: 16px;
+  font-size: 2vw;
+}
+.rrssb-buttons.large-format li:first-child:nth-last-child(3) a,
+.rrssb-buttons.large-format li:first-child:nth-last-child(3) ~ li a {
+  font-size: 14px;
+  font-size: 1.7vw;
+}
+.rrssb-buttons.large-format li:first-child:nth-last-child(4) a,
+.rrssb-buttons.large-format li:first-child:nth-last-child(4) ~ li a {
+  font-size: 13px;
+  font-size: 1.4vw;
+}
+.rrssb-buttons.large-format li:first-child:nth-last-child(5) a,
+.rrssb-buttons.large-format li:first-child:nth-last-child(5) ~ li a {
+  font-size: 13px;
+  font-size: 1.2vw;
+}
+.rrssb-buttons.large-format li:first-child:nth-last-child(6) a,
+.rrssb-buttons.large-format li:first-child:nth-last-child(6) ~ li a {
+  font-size: 12px;
+  font-size: 1.05vw;
+}
+.rrssb-buttons.large-format li:first-child:nth-last-child(7) a,
+.rrssb-buttons.large-format li:first-child:nth-last-child(7) ~ li a {
+  font-size: 11px;
+  font-size: 0.9vw;
+}
+.rrssb-buttons.large-format li:first-child:nth-last-child(8) a,
+.rrssb-buttons.large-format li:first-child:nth-last-child(8) ~ li a {
+  font-size: 11px;
+  font-size: 0.8vw;
+}
+.rrssb-buttons.large-format li:first-child:nth-last-child(9) a,
+.rrssb-buttons.large-format li:first-child:nth-last-child(9) ~ li a {
+  font-size: 11px;
+  font-size: 0.7vw;
+}
+.rrssb-buttons.large-format li:first-child:nth-last-child(10) a,
+.rrssb-buttons.large-format li:first-child:nth-last-child(10) ~ li a {
+  font-size: 11px;
+  font-size: 0.6vw;
+}
+.rrssb-buttons.large-format li:first-child:nth-last-child(11) a,
+.rrssb-buttons.large-format li:first-child:nth-last-child(11) ~ li a {
+  font-size: 11px;
+  font-size: 0.5vw;
+}
+.rrssb-buttons.large-format li a {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: .2em;
+  padding: 8.5% 0 8.5% 12%;
+}
+.rrssb-buttons.large-format li a .rrssb-icon {
+  height: 100%;
+  left: 7%;
+  padding-top: 0;
+  width: 12%;
+}
+.rrssb-buttons.large-format li a .rrssb-icon svg {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+.rrssb-buttons.large-format li a .rrssb-text {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+.rrssb-buttons.small-format {
+  padding-top: 5px;
+}
+.rrssb-buttons.small-format li {
+  height: 80%;
+  padding: 0 1px;
+}
+.rrssb-buttons.small-format li a .rrssb-icon {
+  height: 100%;
+  padding-top: 0;
+}
+.rrssb-buttons.small-format li a .rrssb-icon svg {
+  height: 48%;
+  position: relative;
+  top: 6px;
+  width: 80%;
+}
+.rrssb-buttons.tiny-format {
+  height: 22px;
+  position: relative;
+}
+.rrssb-buttons.tiny-format li {
+  padding-right: 7px;
+}
+.rrssb-buttons.tiny-format li a {
+  background-color: transparent;
+  padding: 0;
+}
+.rrssb-buttons.tiny-format li a .rrssb-icon svg {
+  height: 70%;
+  width: 100%;
+}
+.rrssb-buttons.tiny-format li a:active,
+.rrssb-buttons.tiny-format li a:hover {
+  background-color: transparent;
+}
+.rrssb-buttons.tiny-format li.rrssb-email a .rrssb-icon svg path,
+.rrssb-buttons.tiny-format li.rrssb-email a .rrssb-icon svg polygon {
+  fill: #0a88ff;
+}
+.rrssb-buttons.tiny-format li.rrssb-email a .rrssb-icon:hover .rrssb-icon svg path,
+.rrssb-buttons.tiny-format li.rrssb-email a .rrssb-icon:hover .rrssb-icon svg polygon {
+  fill: #0054a3;
+}
+.rrssb-buttons.tiny-format li.rrssb-facebook a .rrssb-icon svg path,
+.rrssb-buttons.tiny-format li.rrssb-facebook a .rrssb-icon svg polygon {
+  fill: #306199;
+}
+.rrssb-buttons.tiny-format li.rrssb-facebook a .rrssb-icon:hover .rrssb-icon svg path,
+.rrssb-buttons.tiny-format li.rrssb-facebook a .rrssb-icon:hover .rrssb-icon svg polygon {
+  fill: #18304b;
+}
+.rrssb-buttons.tiny-format li.rrssb-tumblr a .rrssb-icon svg path,
+.rrssb-buttons.tiny-format li.rrssb-tumblr a .rrssb-icon svg polygon {
+  fill: #32506d;
+}
+.rrssb-buttons.tiny-format li.rrssb-tumblr a .rrssb-icon:hover .rrssb-icon svg path,
+.rrssb-buttons.tiny-format li.rrssb-tumblr a .rrssb-icon:hover .rrssb-icon svg polygon {
+  fill: #121d27;
+}
+.rrssb-buttons.tiny-format li.rrssb-linkedin a .rrssb-icon svg path,
+.rrssb-buttons.tiny-format li.rrssb-linkedin a .rrssb-icon svg polygon {
+  fill: #007bb6;
+}
+.rrssb-buttons.tiny-format li.rrssb-linkedin a .rrssb-icon:hover .rrssb-icon svg path,
+.rrssb-buttons.tiny-format li.rrssb-linkedin a .rrssb-icon:hover .rrssb-icon svg polygon {
+  fill: #003650;
+}
+.rrssb-buttons.tiny-format li.rrssb-twitter a .rrssb-icon svg path,
+.rrssb-buttons.tiny-format li.rrssb-twitter a .rrssb-icon svg polygon {
+  fill: #26c4f1;
+}
+.rrssb-buttons.tiny-format li.rrssb-twitter a .rrssb-icon:hover .rrssb-icon svg path,
+.rrssb-buttons.tiny-format li.rrssb-twitter a .rrssb-icon:hover .rrssb-icon svg polygon {
+  fill: #0b84a6;
+}
+.rrssb-buttons.tiny-format li.rrssb-googleplus a .rrssb-icon svg path,
+.rrssb-buttons.tiny-format li.rrssb-googleplus a .rrssb-icon svg polygon {
+  fill: #e93f2e;
+}
+.rrssb-buttons.tiny-format li.rrssb-googleplus a .rrssb-icon:hover .rrssb-icon svg path,
+.rrssb-buttons.tiny-format li.rrssb-googleplus a .rrssb-icon:hover .rrssb-icon svg polygon {
+  fill: #a01e11;
+}
+.rrssb-buttons.tiny-format li.rrssb-youtube a .rrssb-icon svg path,
+.rrssb-buttons.tiny-format li.rrssb-youtube a .rrssb-icon svg polygon {
+  fill: #df1c31;
+}
+.rrssb-buttons.tiny-format li.rrssb-youtube a .rrssb-icon:hover .rrssb-icon svg path,
+.rrssb-buttons.tiny-format li.rrssb-youtube a .rrssb-icon:hover .rrssb-icon svg polygon {
+  fill: #84111d;
+}
+.rrssb-buttons.tiny-format li.rrssb-reddit a .rrssb-icon svg path,
+.rrssb-buttons.tiny-format li.rrssb-reddit a .rrssb-icon svg polygon {
+  fill: #8bbbe3;
+}
+.rrssb-buttons.tiny-format li.rrssb-reddit a .rrssb-icon:hover .rrssb-icon svg path,
+.rrssb-buttons.tiny-format li.rrssb-reddit a .rrssb-icon:hover .rrssb-icon svg polygon {
+  fill: #398bcf;
+}
+.rrssb-buttons.tiny-format li.rrssb-pinterest a .rrssb-icon svg path,
+.rrssb-buttons.tiny-format li.rrssb-pinterest a .rrssb-icon svg polygon {
+  fill: #b81621;
+}
+.rrssb-buttons.tiny-format li.rrssb-pinterest a .rrssb-icon:hover .rrssb-icon svg path,
+.rrssb-buttons.tiny-format li.rrssb-pinterest a .rrssb-icon:hover .rrssb-icon svg polygon {
+  fill: #5d0b11;
+}
+.rrssb-buttons.tiny-format li.rrssb-pocket a .rrssb-icon svg path,
+.rrssb-buttons.tiny-format li.rrssb-pocket a .rrssb-icon svg polygon {
+  fill: #ed4054;
+}
+.rrssb-buttons.tiny-format li.rrssb-pocket a .rrssb-icon:hover .rrssb-icon svg path,
+.rrssb-buttons.tiny-format li.rrssb-pocket a .rrssb-icon:hover .rrssb-icon svg polygon {
+  fill: #b61124;
+}
+.rrssb-buttons.tiny-format li.rrssb-github a .rrssb-icon svg path,
+.rrssb-buttons.tiny-format li.rrssb-github a .rrssb-icon svg polygon {
+  fill: #444;
+}
+.rrssb-buttons.tiny-format li.rrssb-github a .rrssb-icon:hover .rrssb-icon svg path,
+.rrssb-buttons.tiny-format li.rrssb-github a .rrssb-icon:hover .rrssb-icon svg polygon {
+  fill: #111;
+}
+.rrssb-buttons.tiny-format li.rrssb-instagram a .rrssb-icon svg path,
+.rrssb-buttons.tiny-format li.rrssb-instagram a .rrssb-icon svg polygon {
+  fill: #517fa4;
+}
+.rrssb-buttons.tiny-format li.rrssb-instagram a .rrssb-icon:hover .rrssb-icon svg path,
+.rrssb-buttons.tiny-format li.rrssb-instagram a .rrssb-icon:hover .rrssb-icon svg polygon {
+  fill: #2f4a60;
+}
+.rrssb-buttons.tiny-format li.rrssb-delicious a .rrssb-icon svg path,
+.rrssb-buttons.tiny-format li.rrssb-delicious a .rrssb-icon svg polygon {
+  fill: #0B79E5;
+}
+.rrssb-buttons.tiny-format li.rrssb-delicious a .rrssb-icon:hover .rrssb-icon svg path,
+.rrssb-buttons.tiny-format li.rrssb-delicious a .rrssb-icon:hover .rrssb-icon svg polygon {
+  fill: #064684;
+}
+.rrssb-buttons.tiny-format li.rrssb-vk a .rrssb-icon svg path,
+.rrssb-buttons.tiny-format li.rrssb-vk a .rrssb-icon svg polygon {
+  fill: #4d71a9;
+}
+.rrssb-buttons.tiny-format li.rrssb-vk a .rrssb-icon:hover .rrssb-icon svg path,
+.rrssb-buttons.tiny-format li.rrssb-vk a .rrssb-icon:hover .rrssb-icon svg polygon {
+  fill: #2d4263;
+}
+.rrssb-buttons.tiny-format li.rrssb-hackernews a .rrssb-icon svg path,
+.rrssb-buttons.tiny-format li.rrssb-hackernews a .rrssb-icon svg polygon {
+  fill: #f60;
+}
+.rrssb-buttons.tiny-format li.rrssb-hackernews a .rrssb-icon:hover .rrssb-icon svg path,
+.rrssb-buttons.tiny-format li.rrssb-hackernews a .rrssb-icon:hover .rrssb-icon svg polygon {
+  fill: #993d00;
+}
+/****** share icon css end ******/
+/*!
+ * "Fork me on GitHub" CSS ribbon v0.1.1 | MIT License
+ * https://github.com/simonwhitaker/github-fork-ribbon-css
+*/
+/* Left will inherit from right (so we don't need to duplicate code) */
+.github-fork-ribbon {
+  /* The right and left classes determine the side we attach our banner to */
+  position: absolute;
+  /* Add a bit of padding to give some substance outside the "stitching" */
+  padding: 2px 0;
+  /* Set the base colour */
+  background-color: #a00;
+  /* Set a gradient: transparent black at the top to almost-transparent black at the bottom */
+  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 0.15)));
+  background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
+  background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
+  background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
+  background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
+  /* Add a drop shadow */
+  -webkit-box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.5);
+  /* Set the font */
+  font: 700 13px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  z-index: 9999;
+  pointer-events: auto;
+}
+.github-fork-ribbon a,
+.github-fork-ribbon a:hover {
+  /* Set the text properties */
+  color: #fff;
+  text-decoration: none;
+  text-shadow: 0 -1px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  /* Set the geometry. If you fiddle with these you'll also need
+     to tweak the top and right values in .github-fork-ribbon. */
+  width: 200px;
+  line-height: 20px;
+  /* Set the layout properties */
+  display: inline-block;
+  padding: 2px 0;
+  /* Add "stitching" effect */
+  border-width: 1px 0;
+  border-style: dotted;
+  border-color: #fff;
+  border-color: rgba(255, 255, 255, 0.7);
+}
+.github-fork-ribbon-wrapper {
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+  z-index: 9999;
+  pointer-events: none;
+}
+.github-fork-ribbon-wrapper.fixed {
+  position: fixed;
+}
+.github-fork-ribbon-wrapper.left {
+  left: 0;
+}
+.github-fork-ribbon-wrapper.right {
+  right: 0;
+}
+.github-fork-ribbon-wrapper.left-bottom {
+  position: fixed;
+  top: inherit;
+  bottom: 0;
+  left: 0;
+}
+.github-fork-ribbon-wrapper.right-bottom {
+  position: fixed;
+  top: inherit;
+  bottom: 0;
+  right: 0;
+}
+.github-fork-ribbon-wrapper.right .github-fork-ribbon {
+  top: 42px;
+  right: -43px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.github-fork-ribbon-wrapper.left .github-fork-ribbon {
+  top: 42px;
+  left: -43px;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+.github-fork-ribbon-wrapper.left-bottom .github-fork-ribbon {
+  top: 80px;
+  left: -43px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.github-fork-ribbon-wrapper.right-bottom .github-fork-ribbon {
+  top: 80px;
+  right: -43px;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+@font-face {
+  font-family: 'icomoon';
+  src: url('../font/icon/icomoon.eot?-szz5z5');
+  src: url('font/icon/icomoon.eot?#iefix-szz5z5') format('embedded-opentype'), url('../font/icon/icomoon.woff?-szz5z5') format('woff'), url('../font/icon/icomoon.ttf?-szz5z5') format('truetype'), url('../font/icon/icomoon.svg?-szz5z5#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+[class^="icon-"],
+[class*=" icon-"] {
+  font-family: 'icomoon';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-share:before {
+  content: "\e604";
+}
+.icon-donate:before {
+  content: "\e603";
+}
+.icon-use:before {
+  content: "\e602";
+}
+.icon-report:before {
+  content: "\e601";
+}
+.icon-fork:before {
+  content: "\e600";
+}
+/******* layout css ******/
+body {
+  margin: 0;
+}
+h3 {
+  margin-top: 40px;
+}
+#sideContent {
+  margin-left: 300px;
+}
+#bodyContent {
+  padding-top: 20px;
+}
+#projectHeader {
+  height: 50px;
+  padding: 10px 20px;
+  background: #3382c0;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  color: #FFF;
+  font-size: 24px;
+  line-height: 30px;
+}
+#projectHeader .link,
+#projectHeader .link:active,
+#projectHeader .link:hover {
+  color: inherit;
+  text-decoration: none;
+}
+#iwLabLogo {
+  height: 30px;
+  vertical-align: middle;
+  margin-top: -2px;
+}
+#navWrap {
+  position: absolute;
+  top: 0;
+}
+#navWrap ul,
+#navWrap li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#navWrap li {
+  padding: 5px 0px;
+  padding-left: 10px;
+  width: 270px;
+  border-bottom: 1px solid #ffffff;
+  font-size: 16px;
+}
+#navWrap li .nav {
+  display: none;
+}
+#navWrap li li {
+  width: auto;
+  padding: 5px;
+}
+#navWrap li.active .nav {
+  display: block;
+}
+#navWrap li.active {
+  border-left: 2px solid #3382c0;
+  color: #3382c0;
+}
+#navWrap li:hover:not(.active) {
+  border-left: 1px solid #3382c0;
+}
+#navWrap a {
+  color: inherit;
+  display: block;
+}
+#navWrap a:hover {
+  text-decoration: none;
+}
+#navWrap.fixed {
+  position: fixed;
+  top: 20px;
+}
+/** download link **/
+.download-plugin {
+  background: #3382c0;
+  color: #ffffff;
+  padding: 10px 20px;
+  display: inline-block;
+  margin: 10px 0;
+}
+.download-plugin:hover,
+.download-plugin:active {
+  text-decoration: underline;
+  color: #ffffff;
+}
+.experiment-title {
+  margin-top: 0;
+}
+/** button css ***/
+.btn {
+  border: 1px solid #bbb;
+  background: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+  color: white;
+  padding: 10px 30px;
+  cursor: pointer;
+}
+.btn:hover {
+  background-size: 100% 1px, 100% 1px;
+}
+.btn-link {
+  text-decoration: none;
+}
+.btn[data-fancy-btn] {
+  position: relative;
+  font-size: 18px;
+  text-decoration: none;
+}
+.btn[data-fancy-btn] .lines {
+  position: absolute;
+  background: white;
+  -webkit-transition: all ease 300ms;
+  -moz-transition: all ease 300ms;
+  -o-transition: all ease 300ms;
+  transition: all ease 300ms;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+.btn[data-fancy-btn] .top {
+  top: -1px;
+  left: -1px;
+  height: 1px;
+  width: 0;
+}
+.btn[data-fancy-btn] .right {
+  top: -1px;
+  right: -1px;
+  width: 1px;
+  height: 0;
+}
+.btn[data-fancy-btn] .bottom {
+  bottom: -1px;
+  right: -1px;
+  width: 0;
+  height: 1px;
+}
+.btn[data-fancy-btn] .left {
+  bottom: -1px;
+  left: -1px;
+  width: 1px;
+  height: 0;
+}
+.btn[data-fancy-btn]:hover .top,
+.btn[data-fancy-btn].active .top,
+.btn[data-fancy-btn]:hover .bottom,
+.btn[data-fancy-btn].active .bottom {
+  width: 100%;
+  padding-right: 1px;
+}
+.btn[data-fancy-btn]:hover .left,
+.btn[data-fancy-btn].active .left,
+.btn[data-fancy-btn]:hover .right,
+.btn[data-fancy-btn].active .right {
+  height: 100%;
+  padding-top: 1px;
+}
+/*** layout sepecific to one page doc projects ***/
+.layout-onepage #sectionLanding {
+  height: 100vh;
+  max-height: 400px;
+  background: #34495e;
+  display: table;
+  width: 100%;
+  color: white;
+  position: relative;
+  padding-top: 50px;
+}
+.layout-onepage #sectionLanding .btn {
+  border: 1px solid #98afc6;
+}
+.layout-onepage #sectionLanding .arrow-down {
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  width: 80px;
+  height: 80px;
+  margin-left: -40px;
+  cursor: pointer;
+}
+.layout-onepage .section-content {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+.layout-onepage .plugin-name {
+  font-size: 42px;
+  line-height: 44px;
+}
+.layout-onepage .plugin-desc {
+  font-size: 20px;
+  line-height: 22px;
+  margin: 20px 0;
+}
+.layout-onepage .download {
+  width: 250px;
+}
+.layout-onepage .github-fork-ribbon-wrapper {
+  position: fixed;
+}
+#shareButtons {
+  margin-top: 30px;
+}
+#shareButtons .star-btn,
+#shareButtons .twt-btn {
+  display: inline-block;
+}
+#shareButtons .star-btn {
+  margin-right: 30px;
+}
+#shareButtons a {
+  color: white;
+}
+/*** contribute and support section css start ***/
+.layout-onepage #sectionContribute {
+  margin-top: 80px;
+  background: #3382c0;
+  font-size: 16px;
+  line-height: 18px;
+  color: #FFF;
+  z-index: 10;
+  position: relative;
+  padding: 30px 20px;
+}
+.layout-onepage #sectionContribute a {
+  color: inherit;
+}
+.layout-onepage #contribute,
+.layout-onepage #developer {
+  margin-bottom: 40px;
+}
+.layout-onepage #contributionList {
+  list-style: none;
+}
+.layout-onepage #contributionList [class^="icon-"],
+.layout-onepage #contributionList [class*=" icon-"] {
+  font-size: 38px;
+  line-height: 40px;
+  vertical-align: middle;
+  margin-right: 20px;
+}
+.layout-onepage #contributionList h3,
+.layout-onepage #contributionList p {
+  margin: 0;
+}
+.layout-onepage #contributionList .point-head {
+  font-size: 18px;
+  line-height: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.layout-onepage #contributionList li {
+  padding: 10px;
+}
+.layout-onepage #contributionList .share-button-wraps {
+  width: 300px;
+  margin-top: 10px;
+}
+.layout-onepage #contributionList .share-button-wraps li {
+  padding: 0;
+  padding-right: 5px;
+}
+.layout-onepage .section-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.layout-onepage #otherProjects li {
+  float: left;
+  width: 33.33%;
+  margin-top: 30px;
+}
+/*** contribute and support section css end ***/

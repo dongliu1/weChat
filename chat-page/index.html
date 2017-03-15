@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>微聊窗口</title>
+    <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="libs/bootstrap/css/bootstrap.min.css">
+    <style>
+        *{margin:0;padding:0;}
+        html,body{width:100%;height:100%;background-color: #e1e4e9;}
+        a{text-decoration: none;color:#000;}
+        li{list-style: none;padding:.5em;cursor: pointer;}
+        .container{width:100%;height:100%}
+        .chat-contain{z-index:500;position: absolute;width:50em;height:46em;top:50%;left:50%;margin-top:-23em;margin-left:-25em;background-color: #CDD2D9;border:1px solid #C5C1C1;border-radius: 5px;}
+        .user-list{position: absolute;left:0;top:0;bottom: 0;width:10em;border-right:1px solid #C5C1C1;}
+        .message-windows{position:absolute;left:10em;top:0;bottom:0;right:0;background-color: #eee;}
+        .message-windows>.message-list{width:100%;height:75%;border-bottom: 1px solid #C5C1C1;}
+        .message-windows>.message-toolbar{width:100%;height:5%;}
+        .message-windows>.message-send-text{width:100%;height:15%;border-top: 1px solid #C5C1C1;}
+        .message-windows>.message-send{width:100%;height:5%;}
+        .message-send-text>textarea{width:100%;height:100%;outline: none;background-color: #eee;border:0;}
+        .message-send>button{margin:0.5em 1em;}
+        .message-list .message-contain{margin:.5em 0;min-width:6em;cursor:pointer;padding:.5em;border-radius: 3px;background-color:#e1e4e9;display: inline-block;position:relative; }
+        .message-contain .corner-left,.message-contain .corner-right{width:0;height:0;position:absolute;border:10px solid #eee;top:2px;}
+        .message-contain .corner-left{border-right:10px solid #e1e4e9;left:-20px;}
+        .message-contain .corner-right{border-left:10px solid #e1e4e9;right:-20px;}
+
+        .chat-interface-contain{font-family:"Hiragino Sans GB", 'Microsoft YaHei', "WenQuanYi Micro Hei";z-index:10000;position: absolute;top:5em;right:3em;width:20em;min-width:15em;max-width:30em;background: url("img/theme0.jpg") fixed;border:1px solid #d2d2d2;border-radius: 2px;}
+        .chat-interface-contain .chat-interface-head{color:#fff!important;position: absolute;top:0;left:0;right:0;height:10.8em;border-bottom: 1px solid #aaa;}
+        .chat-interface-contain .chat-interface-content{width:100%;height:40em;min-height:25em;max-height: 50em;margin:10.8em 0 3em;background-color: #eee}
+        .chat-interface-contain .chat-interface-footer{position: absolute;bottom:0;left:0;right:0;height:3em;border-top:1px solid #ddd;}
+        .interface-toolbar{margin: .5em -.5em;}
+        .interface-toolbar a{text-decoration: none;color:#fff;margin:0 .2em;}
+        .interface-userinfo{width: 100%;height: 4em;}
+        .interface-userinfo .default-user-img{width:4em;height:4em;font-size:3em;background: #00A1CB;margin:0 .5em;}
+        .interface-userinfo .user-img,.interface-userinfo .username-contain{float: left;}
+        .user-search>input{margin: .5em 0 0;width:100%;background-color: rgba(255,255,255,0.1);color:#fff;border:0;outline: none;padding:.2em;}
+        .chat-group{width:100%;padding: .2em;background-color: rgba(238,238,238,0.9);position: relative;}
+        .chat-group .friend-list,.chat-group .group-list{float: left;margin:0 1em;}
+        .friend-list>a,.group-list>a{color:#adadad;font-size: 1.4em;text-decoration: none;}
+        .friend-list>a:hover,.group-list>a:hover{color:#0a6aa1}
+        .user-active{color:#0a6aa1!important;}
+        .chat-group .up-corner{position: absolute;width:0;height:0;border:.5em solid rgba(255,255,255,0);border-bottom-color:#fff;bottom: 0;left:1.2em;}
+        #chat-group>li>a{color:#bbb;margin-right:1em;}
+        #chat-group>li:hover{background-color: rgba(228, 225, 225, 0.9);}
+        #chat-group>li:hover>a{color:#aaa;}
+        .chat-main-menu{background-color: #bbb;}
+        .chat-main-menu>a{color:#0a6aa1;font-size: 2em;margin:.3em;border:1px solid rgba(255,255,255,0);text-decoration: none;}
+        .chat-main-menu>a:hover{border:1px solid #aaa;box-shadow: 0 0 2px 2px #aaa;}
+    </style>
+    <script src="http://cdn.goeasy.io/goeasy.js"></script>
+    <script src="https://cdn.goeasy.io/goeasy.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top" style="border-radius: 0;">
+    <div class="container-fluid" style="max-width: 1024px;">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">微聊</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+                <li><a href="#">Link</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">One more separated link</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="navbar-form navbar-left">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">Link</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="userinfo"><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="javascript:void(0)" id="username"></a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="javascript:void(0)">退出</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<div class="container">
+    <!-- chat-interface start -->
+    <div class="chat-interface-contain">
+        <!-- chat-interface-head start -->
+        <div class="chat-interface-head">
+            <div class="interface-toolbar clearfix">
+                <div class="company-name col-sm-8 text-left">
+                    <span>WECHAT</span>
+                </div>
+                <div class="toolbar col-sm-4 text-right">
+                    <a href="javascript:void (0)" class="fa fa-window-minimize"></a>
+                    <a href="javascript:void (0)" class="fa fa-close"></a>
+                </div>
+            </div>
+            <div class="interface-userinfo clearfix">
+                <div class="user-img">
+                    <div class="default-user-img hidden"></div>
+                </div>
+                <div class="username-contain">
+                    <div class="username" style="font-size: 1.2em;"></div>
+                    <div class="toolbar">
+                        <a href="javascript:void(0)" class="fa fa-delicious" title="设置主题"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="user-search">
+                <input type="text" placeholder="查找:账号、昵称、群组">
+            </div>
+            <div class="chat-group clearfix">
+                <div class="friend-list">
+                    <a href="javascript:void(0)" title="联系人" class="fa fa-user user-active"></a>
+                </div>
+                <div class="group-list">
+                    <a href="javascript:void(0)" title="群组" class="fa fa-user-plus"></a>
+                </div>
+                <div class="up-corner"></div>
+            </div>
+        </div>
+        <!-- chat-interface-head end -->
+        <!-- chat-interface-content start -->
+        <div class="chat-interface-content">
+            <div class="chat-friends">
+                <ul id="chat-group">
+                    <li><a href="javascript:void (0)" class="fa fa-caret-right"></a>我的好友</li>
+                    <li><a href="javascript:void (0)" class="fa fa-caret-right"></a>其它分组</li>
+                </ul>
+            </div>
+            <div class="chat-groups hidden"></div>
+        </div>
+        <!-- chat-interface-content end -->
+        <!-- chat-interface-footer start -->
+        <div class="chat-interface-footer">
+            <div class="chat-main-menu">
+                <a href="javascript:void(0)" class="fa fa-bars"></a>
+            </div>
+        </div>
+        <div class="menu-list hidden"></div>
+        <!-- chat-interface-footer end -->
+    </div>
+    <!-- chat-interface end -->
+
+    <!-- chat-window start -->
+    <div class="chat-contain hidden">
+        <!-- chat-window-user start -->
+        <div class="user-list"></div>
+        <!-- chat-window-user end -->
+        <!-- chat-window-message start -->
+        <div class="message-windows">
+            <!-- chat-window-message-head start -->
+            <div class="message-head"></div>
+            <!-- chat-window-message-head end -->
+            <!-- chat-window-message-list start -->
+            <div class="message-list"></div>
+            <!-- chat-window-message-list end -->
+            <!-- chat-window-message-toolbar start -->
+            <div class="message-toolbar"></div>
+            <!-- chat-window-message-toolbar end -->
+            <!-- chat-window-message-text start -->
+            <div class="message-send-text">
+                <textarea id="message-text-content"></textarea>
+            </div>
+            <div class="message-send text-right">
+                <button class="send-btn btn btn-primary btn-xs" onclick="init_send()">发送</button>
+            </div>
+            <!-- chat-window-message-text end -->
+        </div>
+        <!-- chat-window-message end -->
+    </div>
+    <!-- chat-window end -->
+</div>
+</body>
+<script src="libs/jquery/jQuery-2.1.4.min.js"></script>
+<script src="libs/bootstrap/js/bootstrap.min.js"></script>
+<script src="../chat-api/api.js"></script>
+<script type="text/javascript">
+    //全局变量
+    var GLOBAL={
+        goEasy:new GoEasy({
+            appkey: '2f810cea-ef1c-42be-8e59-365d5b0a8fee'
+        }),
+        BATH:"../"
+    };
+
+    $(function () {
+        _init_login._init();
+
+    });
+
+    /***********获取登录信息*************/
+    var _init_login={
+        _userInfo:"",
+        _init:function () {
+            var _url = location.search; //获取url中"?"符后的字串
+            if(_url.indexOf("userId")==-1){
+                location.href="../index.html";
+            }
+            _url=_url.split("=");
+            _init_login._init_userInfo(_url[1]);
+        },
+        _init_userInfo:function (userid) {
+            getUserById(GLOBAL.BATH,userid,function (data) {
+                _init_login._userInfo=data;
+                var _html="<img style='width:2em;height:2em;margin:-5px 0;' src='"+data.img+"'/>";
+                $("#userinfo").prepend(_html);
+                _html="<img style='width:4em;height:4em;' src='"+data.img+"'/>";
+                if(data.img!=""){
+                    $(".user-img>.default-user-img").after(_html);
+                }else{
+                    $(".user-img>.default-user-img").text(data.username?(data.username).substr(0,1):(data.account).substr(0,1)).show();
+                }
+                $("#username,.username-contain>.username").text(data.username);
+            })
+        },
+        _init_listen:function () {
+            GLOBAL.goEasy.subscribe({
+                channel: 'weChat',
+                onMessage: function(message){
+                    //console.log(message);
+                    console.log('接收到消息:'+message.content);//拿到了信息之后，你可以做你任何想做的事
+                    var _show=(!isOwnMsg||(isOwnMsg&&message.content!=_message))?["left","right"]:["right","left"];
+                    var _img=(!isOwnMsg||(isOwnMsg&&message.content!=_message))?"img/img1.jpg":"img/img2.jpg";
+                    var _msg= '<div class="col-sm-10 text-'+_show[0]+'">'+
+                        '<div class="message-contain user-message-'+_show[0]+'-contain">'+
+                        '<div class="corner-'+_show[0]+'"></div>'+
+                        '<div class="user-message text-left">'+message.content+'</div>'+
+                        '</div>'+
+                        '</div>';
+                    var _head='<div class="col-sm-2 text-'+_show[1]+'">'+
+                        '<img src="'+_img+'" class="user-icon-'+_show[0]+'" style="width:2em;height:2em;margin:.5em 0;">'+
+                        '</div>';
+                    var _html='<div class="row">';
+                    if(_show[0]=="left"){
+                        _html+=(_head+_msg);
+                    }else{
+                        _html+=(_msg+_head);
+                    }
+                    _html+='</div>';
+                    if(isOwnMsg)isOwnMsg=false;
+                    _message="";
+                    $(".message-list").append(_html);
+                    $("#message-text-content").val("");
+                }
+            });
+        }
+    };
+
+    /*************聊天界面*************/
+    var _init_chat={
+        _scopeId:"",            //聊天界面容器ID
+        /***********聊天界面头部**************/
+        _interface_head:{},
+        /***********聊天界面好友列表**********/
+        _interface_content:{},
+        /***********聊天界面底部菜单**********/
+        _interface_footer:{}
+    };
+
+    /*************聊天窗口*************/
+    var _init_chat_windows={
+        _scopeId:"",            //聊天窗口容器ID
+        /***********聊天窗口左部好友列表**********/
+        _window_left:{},
+        /***********聊天窗口右部头部菜单**********/
+        _window_right_top:{},
+        /***********聊天窗口右部聊天内容**********/
+        _window_right_content:{},
+        /***********聊天窗口右部工具菜单**********/
+        _window_right_toolbar:{},
+        /***********聊天窗口右部底部内容**********/
+        _window_right_footer:{}
+    };
+
+
+
+
+    var isOwnMsg=false;
+    var _message;
+
+    var goEasy = new GoEasy({
+        appkey: '2f810cea-ef1c-42be-8e59-365d5b0a8fee'
+    });
+
+
+    function init_send() {
+        _message=$("#message-text-content").val();
+        isOwnMsg=true;
+        if(_message==""){
+            return false;
+        }
+        goEasy.publish ({
+            channel: 'weChat',
+            message: _message
+        });
+    }
+</script>
+</html>

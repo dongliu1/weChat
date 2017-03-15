@@ -1,0 +1,21 @@
+.roxexplorer-file,.roxexplorer-folder{width:80px;height:80px;text-align:center;display:inline-block;margin:10px 20px;cursor:pointer;float: left;color:#666}
+.roxexplorer-file:hover,.roxexplorer-folder:hover{color:#398def}
+.roxexplorer-file .fa,.roxexplorer-folder .fa{width:80px;height:50px;font-size:50px;}
+.itemname{background:transparent;border:0;width:100%;text-align:center;resize : none;}
+
+#roxexplorer-dlg{background: #eff3f6;}
+#roxexplorer-folderTree{width:20%;display:inline-block;float:left;border:1px solid #eee;height:93%;background:#fff;}
+#roxexplorer-fileList{width:78%;display:inline-block;float:left;margin-left:2%;border:1px solid #eee;height:93%;background:#fff;}
+
+.roxtree-pathholder{padding:0 0 5px}
+
+.roxtree-holder{padding-left:20px}
+.roxtree-root.roxtree-holder{padding-left:0}
+.roxtree-folder{margin-left:0px;list-style-type:none;cursor:pointer;height:30px;line-height:30px}
+.roxtree-root>li{padding:0 3px}
+.roxtree-folder i{color:#398def}
+.roxtree-folder:hover{background:#ffffaa}
+
+.roxtree-active{background:#fdfdd0}
+
+.roxexplorer-folder .fa{color:#398def!important;}

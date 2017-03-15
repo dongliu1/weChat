@@ -1,0 +1,16 @@
+.sktree{height: 100%;overflow: scroll;padding-left:4px}
+.sktree-root{list-style-type:none;padding-left:0px;}
+.sktree-root ul{list-style-type:none;padding-left: 0;}
+.sktree-root li{list-style-type:none;padding-left: 0;}
+.sktree-icon{color:#cccccc;width:0.9em}
+.sktree-icon.fa-caret-down{color:#353f4b}
+.sktree-icon:hover{color:#398def}
+.sktree-name{cursor:pointer;font-size:small}
+.sktree-name:hover{color:#398def}
+.sktree-node{line-height:2em;width: 100%;}
+.sktree-nodediv:hover{background:#ccc}
+.sktree-nodediv:hover .sktree-icon{color:#398def}
+.sktree-error{color:#ff0000}
+.sktree-prefix-item{width:1em;display: inline-block;}
+.sktree-prefix{display: inline-block;}
+.sktree-active{background:#b3c4d8} 
