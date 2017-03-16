@@ -93,14 +93,17 @@
                     </div>
                 </div>
                 <div class="user-search">
-                    <input type="text" placeholder="查找:账号、昵称、群组">
+                    <input type="text" id="search-contact" placeholder="查找:账号、昵称、群组">
                 </div>
                 <div class="chat-group clearfix">
                     <div class="friend-list">
-                        <a href="javascript:void(0)" title="联系人" class="fa fa-user user-active"></a>
+                        <a href="javascript:void(0)" title="联系人" class="fa fa-user user-active" onclick="_init_chat._interface_head._init_switch_tabs('1.2em',0)"></a>
                     </div>
                     <div class="group-list">
-                        <a href="javascript:void(0)" title="群组" class="fa fa-user-plus"></a>
+                        <a href="javascript:void(0)" title="群组" class="fa fa-user-plus" onclick="_init_chat._interface_head._init_switch_tabs('4.3em',1)"></a>
+                    </div>
+                    <div class="recent-contact">
+                        <a href="javascript:void(0)" title="最近联系人" class="fa fa-commenting" onclick="_init_chat._interface_head._init_switch_tabs('8em',2)"></a>
                     </div>
                     <div class="up-corner"></div>
                 </div>
@@ -110,19 +113,30 @@
             <div class="chat-interface-content">
                 <div class="chat-friends">
                     <ul id="chat-group">
-                        <li class="group-user" onclick="_init_chat._interface_content._init_toggle_group(this)">
-                            <a href="javascript:void (0)" style="width:1em;" class="fa fa-caret-right"></a>
+                        <li class="li-group group-user" onclick="_init_chat._interface_content._init_toggle_group(this)">
+                            <a href="javascript:void (0)" style="width:1em;" class="list-corner fa fa-caret-right"></a>
                             <span class="group-name">我的好友</span>
                             <span class="group" style="margin-left:1em;">0/0</span>
+                            <div class="li-group group-user li-default-top">
+                                <a href="javascript:void (0)" style="width:1em;" class="list-corner fa fa-caret-right"></a>
+                                <span class="group-name">我的好友</span>
+                                <span class="group" style="margin-left:1em;">0/0</span>
+                            </div>
                         </li>
-                        <li class="group-other" onclick="_init_chat._interface_content._init_toggle_group(this)">
-                            <a href="javascript:void (0)" style="width:1em;" class="fa fa-caret-right"></a>
+                        <li class="li-group group-other" onclick="_init_chat._interface_content._init_toggle_group(this)">
+                            <a href="javascript:void (0)" style="width:1em;" class="list-corner fa fa-caret-right"></a>
                             <span class="group-name">其它分组</span>
                             <span class="group" style="margin-left:1em;">0/0</span>
                         </li>
                     </ul>
                 </div>
-                <div class="chat-groups hidden"></div>
+                <div class="chat-groups hidden">
+                    <ul id="chat-groups-list"></ul>
+                </div>
+                <div class="chat-contact hidden">
+                    <div><span style="color:#bbb6b6;margin-left:1em;">你可能想找</span></div>
+                    <ul id="contact-list"></ul>
+                </div>
             </div>
             <!-- chat-interface-content end -->
             <!-- chat-interface-footer start -->

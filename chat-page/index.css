@@ -1,4 +1,9 @@
 *{margin:0;padding:0;}
+::-webkit-scrollbar{width:4px;height:6px}
+::-webkit-scrollbar-track{background-color:transparent;}
+::-webkit-scrollbar-thumb{background-color:#777;border-radius:4px;}
+::-webkit-scrollbar-thumb:hover {background-color:#367fa9}
+::-webkit-scrollbar-thumb:active {background-color:#73C0EC}
 html,body{width:100%;height:100%;background-color: #e1e4e9;}
 .container{width:100%;height:100%}
 .container a{text-decoration: none;color:#000;}
@@ -30,15 +35,20 @@ html,body{width:100%;height:100%;background-color: #e1e4e9;}
 .interface-userinfo .user-img,.interface-userinfo .username-contain{float: left;}
 .user-search>input{margin: .5em 0 0;width:100%;background-color: rgba(255,255,255,0.1);color:#fff;border:0;outline: none;padding:.2em;}
 .chat-group{width:100%;padding: .2em;background-color: rgba(238,238,238,0.76);position: relative;}
-.chat-group .friend-list,.chat-group .group-list{float: left;margin:0 1em;}
-.friend-list>a,.group-list>a{color:#adadad;font-size: 1.4em;text-decoration: none;}
-.friend-list>a:hover,.group-list>a:hover{color:#0a6aa1}
+.chat-group .friend-list,.chat-group .group-list,.chat-group .recent-contact{float: left;margin:0 1em;}
+.friend-list>a,.group-list>a,.recent-contact>a{color:#adadad;font-size: 1.4em;text-decoration: none;}
+.friend-list>a:hover,.group-list>a:hover,.recent-contact>a:hover{color:#0a6aa1}
 .user-active{color:#0a6aa1!important;}
 .chat-group .up-corner{position: absolute;width:0;height:0;border:.5em solid rgba(255,255,255,0);border-bottom-color:#fff;bottom: -1px;left:1.2em;}
-#chat-group>li>a{color:#bbb;margin-right:.3em;}
+#chat-group>li:nth-child(2){position: relative;}
+#chat-group .li-group>a{color:#bbb;margin-right:.3em;}
 #chat-group>li:hover{background-color: rgba(228, 225, 225, 0.9);}
 #chat-group>li:hover>a{color:#aaa;}
+.li-default-top{display:none;position:absolute;top:0;left:0;right:5px;padding:.5em;box-shadow: 0 1px 2px 1px #ccc;background-color: #eee;}
 .chat-main-menu{background-color: rgba(187, 187, 187, 0.69);}
 .chat-main-menu>a{color:#0a6aa1;font-size: 2em;margin:.3em;border:1px solid rgba(255,255,255,0);text-decoration: none;}
 .chat-main-menu>a:hover{border:1px solid #aaa;box-shadow: 0 0 2px 2px #aaa;}
-
+.li-group li{padding-left:0;padding-right:0;}
+.li-group li:hover{background-color: #d4b1b1;}
+.chat-friends{height:100%;overflow-x: hidden;overflow-y: scroll;}
+.chat-interface-content>.chat-contact{position:absolute;background-color: #fff;top:0;left:0;right:0;bottom:0;}

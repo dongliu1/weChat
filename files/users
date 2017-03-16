@@ -4,6 +4,7 @@
     "account":"admin",
     "password":"123456",
     "username":"微聊管理员",
+    "img":"img/img0.jpg",
     "chanel":"C_admin"
   },
   {
@@ -11,6 +12,7 @@
     "account":"root",
     "password":"123456",
     "username":"微聊客服",
+    "img":"img/img1.jpg",
     "chanel":"C_root"
   },
   {
@@ -18,6 +20,7 @@
     "account":"liudong",
     "password":"123456",
     "username":"刘东",
+    "img":"img/img2.jpg",
     "chanel":"C_liudong"
   },
   {
@@ -25,6 +28,7 @@
     "account":"liuxia",
     "password":"123456",
     "username":"刘夏",
+    "img":"img/img3.jpg",
     "chanel":"C_liuxia"
   },
   {
@@ -32,6 +36,7 @@
     "account":"liuxi",
     "password":"123456",
     "username":"刘曦",
+    "img":"img/img4.jpg",
     "chanel":"C_liuxi"
   },
   {
@@ -39,6 +44,7 @@
     "account":"liuwei",
     "password":"123456",
     "username":"刘维",
+    "img":"img/img5.jpg",
     "chanel":"C_liuwei"
   },
   {
@@ -46,6 +52,7 @@
     "account":"liulong",
     "password":"123456",
     "username":"柳隆",
+    "img":"img/img6.jpg",
     "chanel":"C_liulong"
   },
   {
@@ -53,6 +60,7 @@
     "account":"yunhaiya",
     "password":"123456",
     "username":"云海涯",
+    "img":"img/img7.jpg",
     "chanel":"C_yunhaiya"
   },
   {
@@ -60,6 +68,7 @@
     "account":"xiezixun",
     "password":"123456",
     "username":"谢紫熏",
+    "img":"img/img8.jpg",
     "chanel":"C_xiezixun"
   },
   {
@@ -67,6 +76,7 @@
     "account":"guyi",
     "password":"123456",
     "username":"古羿",
+    "img":"img/img9.jpg",
     "chanel":"C_guyi"
   },
   {
@@ -74,6 +84,7 @@
     "account":"baizihua",
     "password":"123456",
     "username":"白子画",
+    "img":"img/img10.jpg",
     "chanel":"C_baizihua"
   }
 ]

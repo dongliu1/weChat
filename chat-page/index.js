@@ -84,6 +84,7 @@ var _init_chat={
         _init_chat._init_resizable();
         _init_chat._init_draggable();
         _init_chat._interface_head._init_setting_bgColor();
+        _init_chat._interface_head._init_search_contact();
     },
     _init_resizable:function () {
         $("."+_init_chat._scopeId).resizable({
@@ -94,8 +95,7 @@ var _init_chat={
             minHeight:640,
             maxHeight:1040,
             classes:{
-                "ui-resizable-se": "",
-                "ui-resizable": "highlight"
+                "ui-resizable-se": ""
             }
         });
     },
@@ -178,33 +178,96 @@ var _init_chat={
         _init_show_interface:function () {
             $("."+_init_chat._scopeId).slideDown();
             GLOBAL.isHide=false;
+        },
+        _init_search_contact:function () {
+            var _scope=$("#search-contact");
+            _scope.focus(function () {
+                $(".chat-contact").removeClass("hidden").show();
+                $(".chat-group .up-corner").css("left","8em");
+                $(".chat-group a").removeClass("user-active");
+                $(".chat-group a:last").addClass("user-active");
+            }).blur(function () {
+                var _val=$(this).val();
+                if(_val==""){
+                    $(".chat-contact").hide();
+                    $(".chat-group .up-corner").css("left","1.2em");
+                    $(".chat-group a").removeClass("user-active");
+                    $(".chat-group a:first").addClass("user-active");
+                    $(".chat-interface-content .chat-friends").removeClass("hidden").show();
+                }
+            }).on("keyup",function () {
+                var _val=$(this).val();
+                var _friends=_init_login._userInfo.friends;
+                $("#contact-list").html("");
+                $.each(_friends,function (f, fd) {
+                    getUserById(GLOBAL.BATH,fd,function (data) {
+                        if(_val&&(data.account.indexOf(_val)>-1||data.username.indexOf(_val)>-1)){
+                            var _html="<li userId='"+fd+"' onclick='_init_chat._interface_content._init_open_window("+JSON.stringify(data)+")'>" +
+                                "<img src='"+data.img+"' style='width:2em;height:2em;border-radius: 4px;margin:.2em;'/>" +
+                                "<span>"+data.username+"</span>" +
+                                "</li>";
+                            $("#contact-list").append(_html);
+                        }
+                    })
+                });
+            })
+        },
+        _init_switch_tabs:function (distance,index) {
+            $(".chat-group .up-corner").css("left",distance);
+            $(".chat-group a").removeClass("user-active");
+            $(".chat-group a:eq("+index+")").addClass("user-active");
+            $(".chat-interface-content>div").addClass("hidden");
+            $(".chat-interface-content>div:eq("+index+")").removeClass("hidden").show();
+            if(index==1)_init_chat._interface_content._init_chat_groups()
         }
     },
     /***********聊天界面好友列表**********/
     _interface_content:{
         _init_userlist:function () {
             var _friends=_init_login._userInfo.friends;
-            $("#chat-group>.group-user>.group").text(_friends.length+"/"+_friends.length)
+            $("#chat-group>.group-user .group").text(_friends.length+"/"+_friends.length)
         },
         _init_toggle_group:function (_this) {
-            console.log($(_this).children("a").length);
-            $(_this).children("a").toggleClass("fa-caret-right").toggleClass("fa-caret-down");
+            console.log("aaaaaa");
+            $(_this).find(".list-corner").toggleClass("fa-caret-right").toggleClass("fa-caret-down");
             if($(_this).hasClass("group-user")&&!$(_this).children("ul").length){
+                $(_this).find(".li-default-top").show();
                 var _friends=_init_login._userInfo.friends;
                 console.log(_friends);
-                $(_this).append("<ul></ul>");
+                $(_this).append("<ul style='display:none;height:100%;overflow-x:hidden;overflow-y:scroll;'></ul>");
                 $.each(_friends,function (i, id) {
                     getUserById(GLOBAL.BATH,id,function (data) {
                         console.log(data);
-                        var _li="<li>" +
+                        var _li="<li userId='"+id+"' onclick='event.stopPropagation();' ondblclick='_init_chat._interface_content._init_open_window("+JSON.stringify(data)+")'>" +
                             "<img src='"+data.img+"' style='width:2em;height:2em;border-radius: 4px;margin:.2em;'/>" +
                             "<span>"+data.username+"</span>" +
                             "</li>";
                         $(_this).children("ul").append(_li);
+                        if(i==_friends.length-1){
+                            $(_this).children("ul").slideDown();
+                        }
                     });
                 })
             }else{
-                $(_this).children("ul").slideToggle();
+                $(_this).children("ul").slideToggle(function () {
+                    $(_this).find(".li-default-top").toggle();
+                });
+            }
+        },
+        _init_open_window:function (userinfo) {
+            console.log(userinfo,$(".chat-window-contain").length,$(".chat-window-contain").is(":hidden"));
+            if($(".chat-window-contain").is(":hidden"))$(".chat-window-contain").removeClass("hidden").show();
+        },
+        _init_chat_groups:function () {
+            if(!$("#chat-groups-list").children("li").length){
+                var _public=_init_login._userInfo.publicChanel;
+                getPublicChanel(GLOBAL.BATH,function (chanels) {
+                    var _html="";
+                    $.each(_public,function (c, pid) {
+                        _html+="<li onclick='_init_chat._interface_content._init_open_window("+JSON.stringify(chanels[pid])+")'><a href='javascript:void(0)' class='fa fa-comments' style='margin:0 .5em;color:#0a6aa1;'></a><span>"+chanels[pid].name+"</span></li>"
+                    });
+                    $("#chat-groups-list").append(_html);
+                })
             }
         }
     },
