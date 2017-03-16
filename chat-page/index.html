@@ -55,7 +55,7 @@
                     <ul class="dropdown-menu">
                         <li><a href="javascript:void(0)" id="username"></a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="javascript:void(0)">退出</a></li>
+                        <li onclick="_init_chat._interface_head._init_close_interface();"><a href="javascript:void(0)">退出</a></li>
                     </ul>
                 </li>
             </ul>
@@ -74,18 +74,21 @@
                         <span>WECHAT</span>
                     </div>
                     <div class="toolbar col-sm-4 text-right">
-                        <a href="javascript:void (0)" class="fa fa-window-minimize"></a>
-                        <a href="javascript:void (0)" class="fa fa-close"></a>
+                        <a href="javascript:void (0)" class="fa fa-window-minimize"  onclick="_init_chat._interface_head._init_minimize_interface();"></a>
+                        <a href="javascript:void (0)" class="fa fa-close"  onclick="_init_chat._interface_head._init_close_interface();"></a>
                     </div>
                 </div>
                 <div class="interface-userinfo clearfix">
                     <div class="user-img">
-                        <div class="default-user-img hidden"></div>
+                        <div class="static-default-img default-user-img hidden"  onclick="_init_chat._interface_head._init_setting_theme(this);"></div>
                     </div>
                     <div class="username-contain">
                         <div class="username" style="font-size: 1.2em;"></div>
                         <div class="toolbar">
-                            <a href="javascript:void(0)" class="fa fa-delicious" title="设置主题"></a>
+                            <a href="javascript:void(0)" class="tool-skins" style="color: #00A1CB" title="设置主题">
+                                <i class="fa fa-delicious"></i>
+                            </a>
+                            <img title="背景图片" class="tool-img" src="img/bg4.png" onclick='_init_chat._interface_head._init_setting_theme(this);' style="width:1em;height:1em;cursor: pointer;">
                         </div>
                     </div>
                 </div>
@@ -107,8 +110,16 @@
             <div class="chat-interface-content">
                 <div class="chat-friends">
                     <ul id="chat-group">
-                        <li><a href="javascript:void (0)" class="fa fa-caret-right"></a>我的好友</li>
-                        <li><a href="javascript:void (0)" class="fa fa-caret-right"></a>其它分组</li>
+                        <li class="group-user" onclick="_init_chat._interface_content._init_toggle_group(this)">
+                            <a href="javascript:void (0)" style="width:1em;" class="fa fa-caret-right"></a>
+                            <span class="group-name">我的好友</span>
+                            <span class="group" style="margin-left:1em;">0/0</span>
+                        </li>
+                        <li class="group-other" onclick="_init_chat._interface_content._init_toggle_group(this)">
+                            <a href="javascript:void (0)" style="width:1em;" class="fa fa-caret-right"></a>
+                            <span class="group-name">其它分组</span>
+                            <span class="group" style="margin-left:1em;">0/0</span>
+                        </li>
                     </ul>
                 </div>
                 <div class="chat-groups hidden"></div>
@@ -124,14 +135,6 @@
             <!-- chat-interface-footer end -->
         </div>
         <!-- chat-interface-content-contain start -->
-        <div class="chat-interface-resize chat-left-line"></div>
-        <div class="chat-interface-resize chat-top-line"></div>
-        <div class="chat-interface-resize chat-right-line"></div>
-        <div class="chat-interface-resize chat-bottom-line"></div>
-        <div class="chat-interface-resize chat-left-top-corner"></div>
-        <div class="chat-interface-resize chat-left-bottom-corner"></div>
-        <div class="chat-interface-resize chat-right-top-corner"></div>
-        <div class="chat-interface-resize chat-right-bottom-corner"></div>
     </div>
     <!-- chat-interface end -->
 
@@ -168,6 +171,7 @@
 <script src="libs/jquery/jQuery-2.1.4.min.js"></script>
 <script src="libs/bootstrap/js/bootstrap.min.js"></script>
 <script src="libs/jqueryui/jquery-ui.min.js"></script>
+<script src="libs/colorpicker/colorpicker.js"></script>
 <script src="../chat-api/api.js"></script>
 <script type="text/javascript" src="index.js"></script>
 </html>

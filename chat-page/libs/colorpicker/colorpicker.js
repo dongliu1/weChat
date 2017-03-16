@@ -3,15 +3,18 @@
     var SpColorHex=new Array('FF0000','00FF00','0000FF','FFFF00','00FFFF','FF00FF');
     $.fn.colorpicker = function(options) {
         var opts = jQuery.extend({}, jQuery.fn.colorpicker.defaults, options);
-        initColor();
+        var hasRelElem=false;
+        if((opts.hasOwnProperty("relElement")&&opts.relElement))hasRelElem=true;
+        initColor(hasRelElem?opts.relElement:"");
 		$(this).addClass("has-colorpicker");
         return this.each(function(){
             var obj = $(this);
             obj.bind(opts.event,function(){
                 //定位
-                var ttop  = $(this).offset().top;     //控件的定位点高
+                var ttop  = hasRelElem?$(this).position().top:$(this).offset().top;     //控件的定位点高 相对或绝对
                 var thei  = $(this).height();  //控件本身的高
-                var tleft = $(this).offset().left;    //控件的定位点宽
+                var tleft = hasRelElem?$(this).position().left:$(this).offset().left;    //控件的定位点宽 相对货绝对
+                console.log($(this).position());
                 $("#rox_colorpicker_palette").css({
                     top:ttop+thei+5,
                     left:tleft
@@ -47,19 +50,19 @@
             });
         });
     
-        function initColor(){
-            $("body").append('<div id="rox_colorpicker_palette" style="position:absolute;display:none;padding:3px;background-color:#fff;box-shadow:0 0 10px #333;border-radius:3px" class="has-colorpicker"></div>');
+        function initColor(elem){
+            $(elem?elem:"body").append('<div id="rox_colorpicker_palette" style="position:absolute;display:none;padding:3px;background-color:#fff;box-shadow:0 0 10px #333;border-radius:3px" class="has-colorpicker"></div>');
             var colorTable = '';
             var colorValue = '';
-            for(i=0;i<2;i++){
-                for(j=0;j<6;j++){
+            for(var i=0;i<2;i++){
+                for(var j=0;j<6;j++){
                     colorTable=colorTable+'<tr height=12>'
                     colorTable=colorTable+'<td width=11 rel="#000000" style="background-color:#000000">'
                     colorValue = i==0 ? ColorHex[j]+ColorHex[j]+ColorHex[j] : SpColorHex[j];
                     colorTable=colorTable+'<td width=11 rel="#'+colorValue+'" style="background-color:#'+colorValue+'">'
                     colorTable=colorTable+'<td width=11 rel="#000000" style="background-color:#000000">'
-                    for (k=0;k<3;k++){
-                        for (l=0;l<6;l++){
+                    for (var k=0;k<3;k++){
+                        for (var l=0;l<6;l++){
                             colorValue = ColorHex[k+i*3]+ColorHex[l]+ColorHex[j];
                             colorTable=colorTable+'<td width=11 rel="#'+colorValue+'" style="background-color:#'+colorValue+'">'
                         }
