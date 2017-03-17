@@ -8,7 +8,7 @@ html,body{width:100%;height:100%;background-color: #e1e4e9;}
 .container{width:100%;height:100%;font-family:"Hiragino Sans GB", 'Microsoft YaHei', "WenQuanYi Micro Hei";}
 .container a{text-decoration: none;color:#000;}
 .container li{list-style: none;padding:.5em;cursor: pointer;}
-.chat-window-contain{z-index:500;position: absolute;width:50em;height:46em;top:50%;left:50%;margin-top:-23em;margin-left:-25em;background-color: #CDD2D9;border:1px solid #C5C1C1;border-radius: 5px;}
+.chat-window-contain{display:none;z-index:5000;position: absolute;width:50em;height:46em;top:50%;left:50%;margin-top:-23em;margin-left:-25em;background: url("img/theme0.jpg");border:1px solid #C5C1C1;border-radius: 5px;}
 .user-list{position: absolute;left:0;top:0;bottom: 0;width:10em;border-right:1px solid #C5C1C1;background-color: rgba(204, 204, 204, 0.8);}
 .message-windows{position:absolute;left:10em;top:0;bottom:0;right:0;background-color: rgba(233,233,233,0.8);}
 .message-windows>.message-head{width:100%;height:10%;border-bottom: 1px solid #C5C1C1;}
@@ -30,8 +30,11 @@ html,body{width:100%;height:100%;background-color: #e1e4e9;}
 .chat-interface-content-contain .chat-interface-head{color:#fff!important;position: absolute;top:0;left:0;right:0;height:10.8em;border-bottom: 1px solid rgba(238,238,238,0.9);}
 .chat-interface-content-contain .chat-interface-content{position:absolute;left:0;right:0;top:10.8em;bottom:3em;background-color: rgba(238, 238, 238, 0.89)}
 .chat-interface-content-contain .chat-interface-footer{position: absolute;bottom:0;left:0;right:0;height:3em;border-top:1px solid #ddd;}
-.interface-toolbar{margin: .5em -.5em;}
-.interface-toolbar a{text-decoration: none;color:#fff;margin:0 .2em;}
+.interface-toolbar{width:100%;}
+.interface-toolbar .company-name{margin: .5em;float: left}
+.interface-toolbar .toolbar{float: right}
+.interface-toolbar a{color:#fff;display:inline-block;text-align: center;padding:.2em .5em;}
+.interface-toolbar a:last-child:hover{background-color: darkred;}
 .interface-userinfo{width: 100%;height: 4em;}
 .interface-userinfo .default-user-img{width:4em;height:4em;font-size:3em;background: #00A1CB;margin:0 .5em;}
 .interface-userinfo .user-img,.interface-userinfo .username-contain{float: left;}
@@ -40,7 +43,7 @@ html,body{width:100%;height:100%;background-color: #e1e4e9;}
 .chat-group .friend-list,.chat-group .group-list,.chat-group .recent-contact{float: left;margin:0 1em;}
 .friend-list>a,.group-list>a,.recent-contact>a{color:#adadad;font-size: 1.4em;text-decoration: none;}
 .friend-list>a:hover,.group-list>a:hover,.recent-contact>a:hover{color:#0a6aa1}
-.user-active{color:#0a6aa1!important;}
+.user-group-active{color:#0a6aa1!important;}
 .chat-group .up-corner{position: absolute;width:0;height:0;border:.5em solid rgba(255,255,255,0);border-bottom-color:#fff;bottom: -1px;left:1.2em;}
 #chat-group>li:nth-child(2){position: relative;}
 #chat-group .li-group>a{color:#bbb;margin-right:.3em;}
@@ -66,3 +69,9 @@ html,body{width:100%;height:100%;background-color: #e1e4e9;}
 .window-control>.window-normal:hover{background-color: #1c8ed0;color:#fff;}
 .window-control>.window-close:hover{background-color: darkred;color:#fff;}
 .user-active{background: rgba(255,255,255,0.8)!important;border-radius: 4px;}
+#user-list .user-close{position:absolute;right:.5em;color:#444;margin-top:.2em;display:none;}
+#user-list .user-close:hover{color:#ff0000;}
+#user-list li:hover .user-close{display:inline-block;}
+.dlg-index{z-index:7000;}
+
+.glb-hidden{display:none;}

@@ -5,22 +5,22 @@
 var GLOBAL={
     goEasy:new GoEasy({
         appkey: '2f810cea-ef1c-42be-8e59-365d5b0a8fee'
-    }),
-    BATH:"../",
-    isDrag:true,
-    _cursor:"default",
-    isHide:false
+    }),     //启动goEasy服务
+    BATH:"../",          //相对api路径
+    isHide:false,       //聊天界面显示状态
+    userPageInfo:{}      //窗口界面用户信息
 };
 
 $(function () {
-    _init_login._init();
-    _init_chat._init();
+    _init_login._init();            //初始化登录信息
+    _init_chat._init();             //初始化聊天界面
+    _init_chat_windows._init();     //初始化聊天窗口
 });
 
 /***********获取登录信息*************/
 var _init_login={
     _userInfo:"",
-    _init:function () {
+    _init:function () {             //初始化登录信息
         var _url = location.search; //获取url中"?"符后的字串
         if(_url.indexOf("userId")==-1){
             location.href="../index.html";
@@ -28,7 +28,7 @@ var _init_login={
         _url=_url.split("=");
         _init_login._init_userInfo(_url[1]);
     },
-    _init_userInfo:function (userid) {
+    _init_userInfo:function (userid) {  //初始化登录用户信息
         getUserById(GLOBAL.BATH,userid,function (data) {
             _init_login._userInfo=data;
             var _html="<img style='width:2em;height:2em;margin:-5px 0;' onclick='_init_chat._interface_head._init_show_interface();' src='"+data.img+"'/>";
@@ -42,14 +42,20 @@ var _init_login={
             $("#username,.username-contain>.username").text(data.username);
             $(".static-default-img").bind("click");
             _init_chat._interface_content._init_userlist();
+            _init_login._init_listen_personalChanel();
+            $.each(data.publicChanel,function (i, pid) {
+                getPublicChanel(GLOBAL.BATH,function (publicChanel) {
+                    _init_login._init_listen_publicChanel(publicChanel[pid]);
+                })
+            });
         })
     },
-    _init_listen:function () {
+    _init_listen_personalChanel:function () {      //监听私人频道         个人消息
         GLOBAL.goEasy.subscribe({
-            channel: 'weChat',
+            channel: _init_login._userInfo.chanel,
             onMessage: function(message){
                 //console.log(message);
-                console.log('接收到消息:'+message.content);//拿到了信息之后，你可以做你任何想做的事
+                /*console.log('接收到消息:'+message.content);//拿到了信息之后，你可以做你任何想做的事
                 var _show=(!isOwnMsg||(isOwnMsg&&message.content!=_message))?["left","right"]:["right","left"];
                 var _img=(!isOwnMsg||(isOwnMsg&&message.content!=_message))?"img/img1.jpg":"img/img2.jpg";
                 var _msg= '<div class="col-sm-10 text-'+_show[0]+'">'+
@@ -71,9 +77,17 @@ var _init_login={
                 if(isOwnMsg)isOwnMsg=false;
                 _message="";
                 $(".message-list").append(_html);
-                $("#message-text-content").val("");
+                $("#message-text-content").val("");*/
             }
         });
+    },
+    _init_listen_publicChanel:function (pchanel) {         //监听公众频道      群消息
+        GLOBAL.goEasy.subscribe({
+            channel: pchanel.chanel,
+            onMessage: function (message) {
+
+            }
+        })
     }
 };
 
@@ -144,11 +158,16 @@ var _init_chat={
         },
         _init_setting_theme:function (_that) {               //背景图片
             var _html="<div class='skins-img'></div>";
+            if($(".skins-img").length)$(".skins-img").dialog("destroy");
             $(_html).dialog({
                 width:800,
                 height:600,
                 title:"选择图片",
                 closeText:"关闭",
+                dialogClass:"dlg-index",
+                close:function () {
+                    $(this).dialog("destroy")
+                },
                 create:function () {
                     var _this=this;
                     for(var i=0;i<11;i++){
@@ -182,18 +201,19 @@ var _init_chat={
         _init_search_contact:function () {
             var _scope=$("#search-contact");
             _scope.focus(function () {
-                $(".chat-contact").removeClass("hidden").show();
+                $(".chat-interface-content>div").hide();
+                $(".chat-interface-content .chat-contact").show();
                 $(".chat-group .up-corner").css("left","8em");
-                $(".chat-group a").removeClass("user-active");
-                $(".chat-group a:last").addClass("user-active");
+                $(".chat-group a").removeClass("user-group-active");
+                $(".chat-group a:last").addClass("user-group-active");
             }).blur(function () {
                 var _val=$(this).val();
                 if(_val==""){
-                    $(".chat-contact").hide();
+                    $(".chat-interface-content>div").hide();
                     $(".chat-group .up-corner").css("left","1.2em");
-                    $(".chat-group a").removeClass("user-active");
-                    $(".chat-group a:first").addClass("user-active");
-                    $(".chat-interface-content .chat-friends").removeClass("hidden").show();
+                    $(".chat-group a").removeClass("user-group-active");
+                    $(".chat-group a:first").addClass("user-group-active");
+                    $(".chat-interface-content .chat-friends").show();
                 }
             }).on("keyup",function () {
                 var _val=$(this).val();
@@ -214,10 +234,10 @@ var _init_chat={
         },
         _init_switch_tabs:function (distance,index) {
             $(".chat-group .up-corner").css("left",distance);
-            $(".chat-group a").removeClass("user-active");
-            $(".chat-group a:eq("+index+")").addClass("user-active");
-            $(".chat-interface-content>div").addClass("hidden");
-            $(".chat-interface-content>div:eq("+index+")").removeClass("hidden").show();
+            $(".chat-group a").removeClass("user-group-active");
+            $(".chat-group a:eq("+index+")").addClass("user-group-active");
+            $(".chat-interface-content>div").hide();
+            $(".chat-interface-content>div:eq("+index+")").show();
             if(index==1)_init_chat._interface_content._init_chat_groups()
         }
     },
@@ -254,11 +274,10 @@ var _init_chat={
             }
         },
         _init_open_window:function (userinfo) {
-            //console.log(userinfo,$(".chat-window-contain").length,$(".chat-window-contain").is(":hidden"));
-            //var _src=$(".chat-interface-content-contain").css("background");
-            if($(".chat-window-contain").is(":hidden"))$(".chat-window-contain").removeClass("hidden").show();
-            $(".chat-window-contain").css("background",userinfo.background);
-
+            if(!GLOBAL.userPageInfo.hasOwnProperty(userinfo.account))GLOBAL.userPageInfo[userinfo.account]=userinfo;
+            _init_chat_windows._currentUser=GLOBAL.userPageInfo[userinfo.account];
+            _init_chat_windows._init_windowInfo();
+            $(".chat-window-contain").css("background",_init_chat_windows._currentUser.background);
         },
         _init_chat_groups:function () {
             if(!$("#chat-groups-list").children("li").length){
@@ -284,37 +303,155 @@ var _init_chat={
 /*************聊天窗口*************/
 var _init_chat_windows={
     _scopeId:"chat-window-contain",            //聊天窗口容器ID
+    _currentUser:{},
+    _init:function () {
+        _init_chat_windows._init_resizable();
+        _init_chat_windows._init_draggable();
+    },
+    _init_windowInfo:function () {
+        if($("."+_init_chat_windows._scopeId).is(":hidden")){
+            $("#user-list").html("");
+            $(".message-windows>.message-list").html("")
+        }
+        _init_chat_windows._window_left._init();
+        _init_chat_windows._window_right_top._init();
+        _init_chat_windows._window_right_content._init();
+    },
+    _init_resizable:function () {
+        $("."+_init_chat_windows._scopeId).resizable({
+            containment:"body",
+            handles: "n,e,s,w,ne,nw,se,sw",
+            classes:{
+                "ui-resizable-se": ""
+            }
+        });
+    },
+    _init_draggable:function () {
+        $("."+_init_chat_windows._scopeId).draggable({
+            containment:"body"
+        });
+    },
     /***********聊天窗口左部好友列表**********/
-    _window_left:{},
+    _window_left:{
+        _init:function () {
+            $("#user-list>li").removeClass("user-active");
+            if($("[dbaccount='"+_init_chat_windows._currentUser.account+"']").length){
+                $("[dbaccount='"+_init_chat_windows._currentUser.account+"']").addClass("user-active");
+            }else{
+                var _lgt=$("#user-list>li").length;
+                var _li='<li '+(_lgt?'class="user-active"':'')+' dbaccount="'+_init_chat_windows._currentUser.account+'" onclick="_init_chat_windows._window_left._init_toggle(this)">'+
+                    '<a href="javascript:void(0)"><img src="'+_init_chat_windows._currentUser.img+'" style="width:2em;height:2em;margin-right:.5em;"/></a>'+
+                    '<span>'+_init_chat_windows._currentUser.username+'</span>'+
+                    '<a class="user-close" href="javascript:void(0)" onclick="_init_chat_windows._window_left._init_delUser(_init_chat_windows._currentUser.account)">'+
+                    '<i class="fa fa-times-circle"></i>'+
+                    '</a>'+
+                    '</li>';
+                $("#user-list").prepend(_li)
+            }
+        },
+        _init_delUser:function (account) {
+            if(GLOBAL.userPageInfo.length>1){
+                var _this=$("[dbaccount='"+account+"']");
+                var _next=_this.next();
+                var _prev=_this.prev();
+                var _scope="";
+                if(_next.length){
+                    _scope=_next;
+                }else{
+                   _scope=_prev
+                }
+                var _account=_scope.attr("dbaccount");
+                _this.slideUp(1000,function(){
+                    _scope.addClass("user-active");
+                    $(this).remove();
+                });
+                _init_chat_windows._currentUser=GLOBAL.userPageInfo[_account];
+                _init_chat_windows._window_right_top._init();
+                _init_chat_windows._window_right_content._init();
+            }else{
+                $("."+ _init_chat_windows._scopeId).hide();
+                GLOBAL.userPageInfo={};
+            }
+        },
+        _init_toggle:function (_this) {
+            var _account=$(_this).attr("dbaccount");
+            _init_chat_windows._currentUser=GLOBAL.userPageInfo[_account];
+            $("#user-list>li").removeClass("user-active");
+            $(_this).addClass("user-active");
+            _init_chat_windows._window_right_top._init();
+            _init_chat_windows._window_right_content._init();
+        }
+    },
     /***********聊天窗口右部头部菜单**********/
-    _window_right_top:{},
+    _window_right_top:{
+        _init:function (userinfo) {
+
+        },
+        _init_minimize:function () {
+            $("."+_init_chat_windows._scopeId).toggle();
+        },
+        _init_maximize:function () {
+            $("."+_init_chat_windows._scopeId).css({
+                top:0,
+                left:0,
+                margin:0,
+                width:"100%",
+                height:"100%"
+            })
+        },
+        _init_window_close:function () {
+            if($(".window-close-dlg").length)return false;
+            if(GLOBAL.userPageInfo.length>1) {
+                var _dlg = $("<div class='window-close-dlg' style='width:200px;height:100px;'>关闭此窗口所有会话，还是关闭当前会话？</div>").appendTo("." + _init_chat_windows._scopeId);
+                $(_dlg).dialog({
+                    width: 300,
+                    height: 150,
+                    containment: "." + _init_chat_windows._scopeId,
+                    title: "关闭会话",
+                    closeText: "关闭",
+                    dialogClass: "dlg-index",
+                    close: function () {
+                        $(this).dialog("destroy")
+                    },
+                    open: function () {
+                        $(this).prev().children(".ui-dialog-title").prepend("<i class='fa fa-comments' style='margin-right:.5em;'></i>");
+                    },
+                    buttons: {
+                        "关闭所有": function () {
+                            $(this).dialog("destroy");
+                            $("."+ _init_chat_windows._scopeId).hide();
+                            GLOBAL.userPageInfo={};
+                        },
+                        "关闭当前": function () {
+                            _init_chat_windows._window_left._init_delUser(_init_chat_windows._currentUser.account);
+                            $(this).dialog("destroy")
+                        }
+                    }
+                });
+            }else{
+                $("."+ _init_chat_windows._scopeId).hide();
+                GLOBAL.userPageInfo={};
+            }
+        }
+    },
     /***********聊天窗口右部聊天内容**********/
-    _window_right_content:{},
+    _window_right_content:{
+        _init:function () {
+
+        },
+        _init_message_cotent:function () {
+
+        }
+    },
     /***********聊天窗口右部工具菜单**********/
     _window_right_toolbar:{},
     /***********聊天窗口右部底部内容**********/
-    _window_right_footer:{}
-};
-
-
-
-
-var isOwnMsg=false;
-var _message;
-
-var goEasy = new GoEasy({
-    appkey: '2f810cea-ef1c-42be-8e59-365d5b0a8fee'
-});
-
-
-function init_send() {
-    _message=$("#message-text-content").val();
-    isOwnMsg=true;
-    if(_message==""){
-        return false;
+    _window_right_footer:{
+        _init_send_message:function (_message) {
+            GLOBAL.goEasy.publish ({
+                channel: 'weChat',
+                message: _message
+            });
+        }
     }
-    goEasy.publish ({
-        channel: 'weChat',
-        message: _message
-    });
-}
+};

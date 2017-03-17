@@ -70,17 +70,21 @@
             <!-- chat-interface-head start -->
             <div class="chat-interface-head">
                 <div class="interface-toolbar clearfix">
-                    <div class="company-name col-sm-8 text-left">
+                    <div class="company-name">
                         <span>WECHAT</span>
                     </div>
-                    <div class="toolbar col-sm-4 text-right">
-                        <a href="javascript:void (0)" class="fa fa-window-minimize"  onclick="_init_chat._interface_head._init_minimize_interface();"></a>
-                        <a href="javascript:void (0)" class="fa fa-close"  onclick="_init_chat._interface_head._init_close_interface();"></a>
+                    <div class="toolbar">
+                        <a href="javascript:void (0)"  onclick="_init_chat._interface_head._init_minimize_interface();" title="最小化">
+                            <i  class="fa fa-window-minimize"></i>
+                        </a>
+                        <a href="javascript:void (0)"  onclick="_init_chat._interface_head._init_close_interface();" title="关闭">
+                            <i class="fa fa-close"></i>
+                        </a>
                     </div>
                 </div>
                 <div class="interface-userinfo clearfix">
                     <div class="user-img">
-                        <div class="static-default-img default-user-img hidden"  onclick="_init_chat._interface_head._init_setting_theme(this);"></div>
+                        <div class="static-default-img default-user-img glb-hidden"  onclick="_init_chat._interface_head._init_setting_theme(this);"></div>
                     </div>
                     <div class="username-contain">
                         <div class="username" style="font-size: 1.2em;"></div>
@@ -97,7 +101,7 @@
                 </div>
                 <div class="chat-group clearfix">
                     <div class="friend-list">
-                        <a href="javascript:void(0)" title="联系人" class="fa fa-user user-active" onclick="_init_chat._interface_head._init_switch_tabs('1.2em',0)"></a>
+                        <a href="javascript:void(0)" title="联系人" class="fa fa-user user-group-active" onclick="_init_chat._interface_head._init_switch_tabs('1.2em',0)"></a>
                     </div>
                     <div class="group-list">
                         <a href="javascript:void(0)" title="群组" class="fa fa-user-plus" onclick="_init_chat._interface_head._init_switch_tabs('4.3em',1)"></a>
@@ -130,10 +134,10 @@
                         </li>
                     </ul>
                 </div>
-                <div class="chat-groups hidden">
+                <div class="chat-groups glb-hidden">
                     <ul id="chat-groups-list"></ul>
                 </div>
-                <div class="chat-contact hidden">
+                <div class="chat-contact glb-hidden">
                     <div><span style="color:#bbb6b6;margin-left:1em;">你可能想找</span></div>
                     <ul id="contact-list"></ul>
                 </div>
@@ -167,8 +171,20 @@
         <!-- chat-window-user start -->
         <div class="user-list">
             <ul id="user-list">
-                <li class="user-active"><a href="javascript:void(0)"><img src="img/img0.jpg" style="width:2em;height:2em;margin-right:.5em;"/></a><span>微聊管理员</span></li>
-                <li><a href="javascript:void(0)"><img src="img/img1.jpg" style="width:2em;height:2em;margin-right:.5em;"/></a><span>微聊客服</span></li>
+                <li class="user-active">
+                    <a href="javascript:void(0)"><img src="img/img0.jpg" style="width:2em;height:2em;margin-right:.5em;"/></a>
+                    <span>微聊管理员</span>
+                    <a class="user-close" href="javascript:void(0)">
+                        <i class="fa fa-times-circle"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)"><img src="img/img1.jpg" style="width:2em;height:2em;margin-right:.5em;"/></a>
+                    <span>微聊客服</span>
+                    <a class="user-close" href="javascript:void(0)">
+                        <i class="fa fa-times-circle"></i>
+                    </a>
+                </li>
             </ul>
         </div>
         <!-- chat-window-user end -->
@@ -181,9 +197,9 @@
                         <span>微聊管理员</span>
                     </div>
                     <div class="window-control text-right">
-                        <a href="javascript:void(0)" class="window-normal" ><i class="fa fa-window-minimize"></i></a>
-                        <a href="javascript:void(0)" class="window-normal"><i class="fa fa-window-maximize"></i></a>
-                        <a href="javascript:void(0)" class="window-close" ><i class="fa fa-close"></i></a>
+                        <a href="javascript:void(0)" class="window-normal" title="最小化" onclick="_init_chat_windows._window_right_top._init_minimize();"><i class="fa fa-window-minimize"></i></a>
+                        <a href="javascript:void(0)" class="window-normal" title="最大化" onclick="_init_chat_windows._window_right_top._init_maximize();"><i class="fa fa-window-maximize"></i></a>
+                        <a href="javascript:void(0)" class="window-close" title="关闭" onclick="_init_chat_windows._window_right_top._init_window_close();"><i class="fa fa-close"></i></a>
                     </div>
                 </div>
                 <div class="message-head-toolbar"></div>
