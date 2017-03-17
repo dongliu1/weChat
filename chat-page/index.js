@@ -272,7 +272,11 @@ var _init_chat={
         }
     },
     /***********聊天界面底部菜单**********/
-    _interface_footer:{}
+    _interface_footer:{
+        _init_menus:function () {
+            $(".chat-interface-content-contain>.menu-list").toggle("drop")
+        }
+    }
 };
 
 /*************聊天窗口*************/
