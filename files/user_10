@@ -3,6 +3,7 @@
   "username":"白子画",
   "chanel":"C_baizihua",
   "img":"img/img10.jpg",
+  "background":"url(img/theme10.jpg)",
   "friends":[2,5,6,7,9],
   "publicChanel":[1,2,4,5,8,9]
 }

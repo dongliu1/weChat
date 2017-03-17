@@ -228,16 +228,15 @@ var _init_chat={
             $("#chat-group>.group-user .group").text(_friends.length+"/"+_friends.length)
         },
         _init_toggle_group:function (_this) {
-            console.log("aaaaaa");
             $(_this).find(".list-corner").toggleClass("fa-caret-right").toggleClass("fa-caret-down");
             if($(_this).hasClass("group-user")&&!$(_this).children("ul").length){
                 $(_this).find(".li-default-top").show();
                 var _friends=_init_login._userInfo.friends;
-                console.log(_friends);
+                //console.log(_friends);
                 $(_this).append("<ul style='display:none;height:100%;overflow-x:hidden;overflow-y:scroll;'></ul>");
                 $.each(_friends,function (i, id) {
                     getUserById(GLOBAL.BATH,id,function (data) {
-                        console.log(data);
+                        //console.log(data);
                         var _li="<li userId='"+id+"' onclick='event.stopPropagation();' ondblclick='_init_chat._interface_content._init_open_window("+JSON.stringify(data)+")'>" +
                             "<img src='"+data.img+"' style='width:2em;height:2em;border-radius: 4px;margin:.2em;'/>" +
                             "<span>"+data.username+"</span>" +
@@ -255,8 +254,11 @@ var _init_chat={
             }
         },
         _init_open_window:function (userinfo) {
-            console.log(userinfo,$(".chat-window-contain").length,$(".chat-window-contain").is(":hidden"));
+            //console.log(userinfo,$(".chat-window-contain").length,$(".chat-window-contain").is(":hidden"));
+            //var _src=$(".chat-interface-content-contain").css("background");
             if($(".chat-window-contain").is(":hidden"))$(".chat-window-contain").removeClass("hidden").show();
+            $(".chat-window-contain").css("background",userinfo.background);
+
         },
         _init_chat_groups:function () {
             if(!$("#chat-groups-list").children("li").length){

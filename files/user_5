@@ -3,6 +3,7 @@
   "username":"刘维",
   "chanel":"C_liuwei",
   "img":"img/img5.jpg",
+  "background":"url(img/theme5.jpg)",
   "friends":[2,3,4,8,10],
   "publicChanel":[2,3,6,8,9,10]
 }

@@ -3,6 +3,7 @@
   "username":"柳隆",
   "chanel":"C_liulong",
   "img":"img/img6.jpg",
+  "background":"url(img/theme6.jpg)",
   "friends":[2,3,7,8,9,10],
   "publicChanel":[4,6,10]
 }

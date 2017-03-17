@@ -3,6 +3,7 @@
   "username":"刘夏",
   "chanel":"C_liuxia",
   "img":"img/img3.jpg",
+  "background":"url(img/theme3.jpg)",
   "friends":[2,5,6,7,9],
   "publicChanel":[2,6,8,10]
 }

@@ -3,6 +3,7 @@
   "username":"谢紫熏",
   "chanel":"C_xiezixun",
   "img":"img/img8.jpg",
+  "background":"url(img/theme8.jpg)",
   "friends":[2,4,5,6,7],
   "publicChanel":[1,5,8,9]
 }

@@ -163,20 +163,44 @@
     <!-- chat-interface end -->
 
     <!-- chat-window start -->
-    <div class="chat-window-contain hidden">
+    <div class="chat-window-contain">
         <!-- chat-window-user start -->
-        <div class="user-list"></div>
+        <div class="user-list">
+            <ul id="user-list">
+                <li class="user-active"><a href="javascript:void(0)"><img src="img/img0.jpg" style="width:2em;height:2em;margin-right:.5em;"/></a><span>微聊管理员</span></li>
+                <li><a href="javascript:void(0)"><img src="img/img1.jpg" style="width:2em;height:2em;margin-right:.5em;"/></a><span>微聊客服</span></li>
+            </ul>
+        </div>
         <!-- chat-window-user end -->
         <!-- chat-window-message start -->
         <div class="message-windows">
             <!-- chat-window-message-head start -->
-            <div class="message-head"></div>
+            <div class="message-head">
+                <div class="message-head-control clearfix">
+                    <div class="username">
+                        <span>微聊管理员</span>
+                    </div>
+                    <div class="window-control text-right">
+                        <a href="javascript:void(0)" class="window-normal" ><i class="fa fa-window-minimize"></i></a>
+                        <a href="javascript:void(0)" class="window-normal"><i class="fa fa-window-maximize"></i></a>
+                        <a href="javascript:void(0)" class="window-close" ><i class="fa fa-close"></i></a>
+                    </div>
+                </div>
+                <div class="message-head-toolbar"></div>
+            </div>
             <!-- chat-window-message-head end -->
             <!-- chat-window-message-list start -->
             <div class="message-list"></div>
             <!-- chat-window-message-list end -->
             <!-- chat-window-message-toolbar start -->
-            <div class="message-toolbar"></div>
+            <div class="message-toolbar">
+                <div class="clearfix" style="display:inline-block;">
+                    <a href="javascript:void(0)" class="close"><i class="fa fa-star"></i></a>
+                    <a href="javascript:void(0)" class="close"><i class="fa fa-image"></i></a>
+                    <a href="javascript:void(0)" class="close"><i class="fa fa-smile-o"></i></a>
+                    <a href="javascript:void(0)" class="close"><i class="fa fa-font"></i></a>
+                </div>
+            </div>
             <!-- chat-window-message-toolbar end -->
             <!-- chat-window-message-text start -->
             <div class="message-send-text">
