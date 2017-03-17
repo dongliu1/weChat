@@ -52,3 +52,5 @@ html,body{width:100%;height:100%;background-color: #e1e4e9;}
 .li-group li:hover{background-color: #d4b1b1;}
 .chat-friends{height:100%;overflow-x: hidden;overflow-y: scroll;}
 .chat-interface-content>.chat-contact{position:absolute;background-color: #fff;top:0;left:0;right:0;bottom:0;}
+.chat-interface-content-contain>.menu-list{position:absolute;left:0;bottom:3em;width:10em;background-color:#b0b9ab;box-shadow: 1px 1px 1px 1px #d0c8c8;}
+.menu-list li:hover{background-color: #eee;}
