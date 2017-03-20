@@ -277,7 +277,7 @@ var _init_chat={
             if(!GLOBAL.userPageInfo.hasOwnProperty(userinfo.account))GLOBAL.userPageInfo[userinfo.account]=userinfo;
             _init_chat_windows._currentUser=GLOBAL.userPageInfo[userinfo.account];
             _init_chat_windows._init_windowInfo();
-            $(".chat-window-contain").css("background",_init_chat_windows._currentUser.background);
+            $("."+_init_chat_windows._scopeId).show()
         },
         _init_chat_groups:function () {
             if(!$("#chat-groups-list").children("li").length){
@@ -285,7 +285,9 @@ var _init_chat={
                 getPublicChanel(GLOBAL.BATH,function (chanels) {
                     var _html="";
                     $.each(_public,function (c, pid) {
-                        _html+="<li onclick='_init_chat._interface_content._init_open_window("+JSON.stringify(chanels[pid])+")'><a href='javascript:void(0)' class='fa fa-comments' style='margin:0 .5em;color:#0a6aa1;'></a><span>"+chanels[pid].name+"</span></li>"
+                        _html+="<li onclick='_init_chat._interface_content._init_open_window("+JSON.stringify(chanels[pid])+")'>" +
+                            "<a href='javascript:void(0)' class='fa fa-comments' style='margin:0 .5em;color:#0a6aa1;'></a>" +
+                            "<span>"+chanels[pid].name+"</span></li>"
                     });
                     $("#chat-groups-list").append(_html);
                 })
@@ -309,13 +311,18 @@ var _init_chat_windows={
         _init_chat_windows._init_draggable();
     },
     _init_windowInfo:function () {
+        console.log(GLOBAL.userPageInfo);
         if($("."+_init_chat_windows._scopeId).is(":hidden")){
             $("#user-list").html("");
             $(".message-windows>.message-list").html("")
         }
+        _init_chat_windows._init_change_theme();
         _init_chat_windows._window_left._init();
         _init_chat_windows._window_right_top._init();
         _init_chat_windows._window_right_content._init();
+    },
+    _init_change_theme:function () {
+        $("."+_init_chat_windows._scopeId).css("background",_init_chat_windows._currentUser.background);
     },
     _init_resizable:function () {
         $("."+_init_chat_windows._scopeId).resizable({
@@ -342,7 +349,7 @@ var _init_chat_windows={
                 var _li='<li '+(_lgt?'class="user-active"':'')+' dbaccount="'+_init_chat_windows._currentUser.account+'" onclick="_init_chat_windows._window_left._init_toggle(this)">'+
                     '<a href="javascript:void(0)"><img src="'+_init_chat_windows._currentUser.img+'" style="width:2em;height:2em;margin-right:.5em;"/></a>'+
                     '<span>'+_init_chat_windows._currentUser.username+'</span>'+
-                    '<a class="user-close" href="javascript:void(0)" onclick="_init_chat_windows._window_left._init_delUser(_init_chat_windows._currentUser.account)">'+
+                    '<a class="user-close" href="javascript:void(0)" onclick="_init_chat_windows._window_left._init_delUser(\''+_init_chat_windows._currentUser.account+'\');event.stopPropagation();">'+
                     '<i class="fa fa-times-circle"></i>'+
                     '</a>'+
                     '</li>';
@@ -350,7 +357,9 @@ var _init_chat_windows={
             }
         },
         _init_delUser:function (account) {
-            if(GLOBAL.userPageInfo.length>1){
+            //console.log(GLOBAL.userPageInfo,GLOBAL.userPageInfo.length);
+            var arr = Object.keys(GLOBAL.userPageInfo);
+            if(arr.length>1){
                 var _this=$("[dbaccount='"+account+"']");
                 var _next=_this.next();
                 var _prev=_this.prev();
@@ -361,11 +370,15 @@ var _init_chat_windows={
                    _scope=_prev
                 }
                 var _account=_scope.attr("dbaccount");
-                _this.slideUp(1000,function(){
-                    _scope.addClass("user-active");
-                    $(this).remove();
+                var _isActive=_this.hasClass("user-active");
+                _this.slideUp(function(){
+                    if(_isActive&&arr.length>2)_scope.addClass("user-active");
+                    _this.remove();
                 });
-                _init_chat_windows._currentUser=GLOBAL.userPageInfo[_account];
+                if(_isActive)_init_chat_windows._currentUser=GLOBAL.userPageInfo[_account];
+                delete GLOBAL.userPageInfo[account];
+                if((arr.length-1)==1)$("[dbaccount]").removeClass("user-active");
+                _init_chat_windows._init_change_theme();
                 _init_chat_windows._window_right_top._init();
                 _init_chat_windows._window_right_content._init();
             }else{
@@ -378,14 +391,15 @@ var _init_chat_windows={
             _init_chat_windows._currentUser=GLOBAL.userPageInfo[_account];
             $("#user-list>li").removeClass("user-active");
             $(_this).addClass("user-active");
+            _init_chat_windows._init_change_theme();
             _init_chat_windows._window_right_top._init();
             _init_chat_windows._window_right_content._init();
         }
     },
     /***********聊天窗口右部头部菜单**********/
     _window_right_top:{
-        _init:function (userinfo) {
-
+        _init:function () {
+            $(".message-head-control>.username>span").text(_init_chat_windows._currentUser.username)
         },
         _init_minimize:function () {
             $("."+_init_chat_windows._scopeId).toggle();
@@ -401,12 +415,12 @@ var _init_chat_windows={
         },
         _init_window_close:function () {
             if($(".window-close-dlg").length)return false;
-            if(GLOBAL.userPageInfo.length>1) {
-                var _dlg = $("<div class='window-close-dlg' style='width:200px;height:100px;'>关闭此窗口所有会话，还是关闭当前会话？</div>").appendTo("." + _init_chat_windows._scopeId);
-                $(_dlg).dialog({
+            var arr = Object.keys(GLOBAL.userPageInfo);
+            if(arr.length>1) {
+                $("<div class='window-close-dlg' style='width:200px;height:100px;'>关闭此窗口所有会话，还是关闭当前会话？</div>").dialog({
                     width: 300,
                     height: 150,
-                    containment: "." + _init_chat_windows._scopeId,
+                    appendTo: "." + _init_chat_windows._scopeId,
                     title: "关闭会话",
                     closeText: "关闭",
                     dialogClass: "dlg-index",
@@ -437,7 +451,18 @@ var _init_chat_windows={
     /***********聊天窗口右部聊天内容**********/
     _window_right_content:{
         _init:function () {
+            var _scope=$(".message-windows>.message-list");
+            _scope.html("");
+            var _html="";
+            var _account=_init_chat_windows._currentUser.account;
+            $.each(GLOBAL.userPageInfo,function (i, idata) {
+                _html+="<div class='user-message-list' dbfield='"+i+"'>";
+                var _message=[];
+                if(idata.hasOwnProperty("hisMessage"))_message=idata.hisMessage;
+                $.each(_message,function (m, mdata) {
 
+                })
+            })
         },
         _init_message_cotent:function () {
 

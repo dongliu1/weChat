@@ -73,5 +73,6 @@ html,body{width:100%;height:100%;background-color: #e1e4e9;}
 #user-list .user-close:hover{color:#ff0000;}
 #user-list li:hover .user-close{display:inline-block;}
 .dlg-index{z-index:7000;}
+.user-message-list{width:100%;height:100%;display:none;}
 
 .glb-hidden{display:none;}
