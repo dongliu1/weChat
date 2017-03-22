@@ -8,7 +8,8 @@ var GLOBAL={
     }),     //启动goEasy服务
     BATH:"../",          //相对api路径
     isHide:false,       //聊天界面显示状态
-    userPageInfo:{}      //窗口界面用户信息
+    userPageInfo:{},      //窗口界面用户信息
+    hismessage:{}       //保存各频道历史消息
 };
 
 $(function () {
@@ -54,6 +55,11 @@ var _init_login={
         GLOBAL.goEasy.subscribe({
             channel: _init_login._userInfo.chanel,
             onMessage: function(message){
+                console.log(message);
+                var _message=JSON.parse(message.content);
+                if(!GLOBAL.hismessage.hasOwnProperty(_message.account))GLOBAL.hismessage[_message.account]=[];
+                GLOBAL.hismessage[_message.account].push(_message);
+                if($(".user-active").length&&$(".user-active").attr("dbaccount")==_message.account)_init_chat_windows._window_right_content._init();
                 //console.log(message);
                 /*console.log('接收到消息:'+message.content);//拿到了信息之后，你可以做你任何想做的事
                 var _show=(!isOwnMsg||(isOwnMsg&&message.content!=_message))?["left","right"]:["right","left"];
@@ -85,7 +91,10 @@ var _init_login={
         GLOBAL.goEasy.subscribe({
             channel: pchanel.chanel,
             onMessage: function (message) {
-
+                var _message=JSON.parse(message);
+                if(!GLOBAL.hismessage.hasOwnProperty(pchanel.chanel))GLOBAL.hismessage[pchanel.chanel]=[];
+                GLOBAL.hismessage[pchanel.chanel].push(_message);
+                if($(".user-active").length&&$(".user-active").attr("dbaccount")==pchanel.chanel)_init_chat_windows._window_right_content._init();
             }
         })
     }
@@ -257,7 +266,7 @@ var _init_chat={
                 $.each(_friends,function (i, id) {
                     getUserById(GLOBAL.BATH,id,function (data) {
                         //console.log(data);
-                        var _li="<li userId='"+id+"' onclick='event.stopPropagation();' ondblclick='_init_chat._interface_content._init_open_window("+JSON.stringify(data)+")'>" +
+                        var _li="<li userId='"+data.account+"' onclick='event.stopPropagation();' ondblclick='_init_chat._interface_content._init_open_window("+JSON.stringify(data)+")'>" +
                             "<img src='"+data.img+"' style='width:2em;height:2em;border-radius: 4px;margin:.2em;'/>" +
                             "<span>"+data.username+"</span>" +
                             "</li>";
@@ -274,8 +283,14 @@ var _init_chat={
             }
         },
         _init_open_window:function (userinfo) {
-            if(!GLOBAL.userPageInfo.hasOwnProperty(userinfo.account))GLOBAL.userPageInfo[userinfo.account]=userinfo;
-            _init_chat_windows._currentUser=GLOBAL.userPageInfo[userinfo.account];
+            var _key="";
+            if(userinfo.hasOwnProperty("account")){
+                _key=userinfo.account;
+            }else{
+                _key=userinfo.chanel;
+            }
+            if(!GLOBAL.userPageInfo.hasOwnProperty(_key))GLOBAL.userPageInfo[_key]=userinfo;
+            _init_chat_windows._currentUser=GLOBAL.userPageInfo[_key];
             _init_chat_windows._init_windowInfo();
             $("."+_init_chat_windows._scopeId).show()
         },
@@ -322,7 +337,9 @@ var _init_chat_windows={
         _init_chat_windows._window_right_content._init();
     },
     _init_change_theme:function () {
-        $("."+_init_chat_windows._scopeId).css("background",_init_chat_windows._currentUser.background);
+        var _background="#ff0000";
+        if(_init_chat_windows._currentUser.hasOwnProperty("background"))_background=_init_chat_windows._currentUser.background;
+        $("."+_init_chat_windows._scopeId).css("background",_background);
     },
     _init_resizable:function () {
         $("."+_init_chat_windows._scopeId).resizable({
@@ -342,14 +359,26 @@ var _init_chat_windows={
     _window_left:{
         _init:function () {
             $("#user-list>li").removeClass("user-active");
-            if($("[dbaccount='"+_init_chat_windows._currentUser.account+"']").length){
-                $("[dbaccount='"+_init_chat_windows._currentUser.account+"']").addClass("user-active");
+            var _key="";
+            var _icon="";
+            var _name=""
+            if(_init_chat_windows._currentUser.hasOwnProperty("account")){
+                _key=_init_chat_windows._currentUser.account;
+                _icon=_init_chat_windows._currentUser.img;
+                _name=_init_chat_windows._currentUser.username;
+            }else{
+                _key=_init_chat_windows._currentUser.chanel;
+                _icon="img/group.png";
+                _name=_init_chat_windows._currentUser.name
+            }
+            if($("[dbaccount='"+_key+"']").length){
+                $("[dbaccount='"+_key+"']").addClass("user-active");
             }else{
                 var _lgt=$("#user-list>li").length;
-                var _li='<li '+(_lgt?'class="user-active"':'')+' dbaccount="'+_init_chat_windows._currentUser.account+'" onclick="_init_chat_windows._window_left._init_toggle(this)">'+
-                    '<a href="javascript:void(0)"><img src="'+_init_chat_windows._currentUser.img+'" style="width:2em;height:2em;margin-right:.5em;"/></a>'+
-                    '<span>'+_init_chat_windows._currentUser.username+'</span>'+
-                    '<a class="user-close" href="javascript:void(0)" onclick="_init_chat_windows._window_left._init_delUser(\''+_init_chat_windows._currentUser.account+'\');event.stopPropagation();">'+
+                var _li='<li '+(_lgt?'class="user-active"':'')+' dbaccount="'+_key+'" onclick="_init_chat_windows._window_left._init_toggle(this)">'+
+                    '<a href="javascript:void(0)"><img src="'+_icon+'" style="width:2em;height:2em;margin-right:.5em;"/></a>'+
+                    '<span>'+_name+'</span>'+
+                    '<a class="user-close" href="javascript:void(0)" onclick="_init_chat_windows._window_left._init_delUser(\''+_key+'\');event.stopPropagation();">'+
                     '<i class="fa fa-times-circle"></i>'+
                     '</a>'+
                     '</li>';
@@ -399,7 +428,7 @@ var _init_chat_windows={
     /***********聊天窗口右部头部菜单**********/
     _window_right_top:{
         _init:function () {
-            $(".message-head-control>.username>span").text(_init_chat_windows._currentUser.username)
+            $(".message-head-control>.username>span").text(_init_chat_windows._currentUser.hasOwnProperty("username")?_init_chat_windows._currentUser.username:_init_chat_windows._currentUser.name)
         },
         _init_minimize:function () {
             $("."+_init_chat_windows._scopeId).toggle();
@@ -454,15 +483,18 @@ var _init_chat_windows={
             var _scope=$(".message-windows>.message-list");
             _scope.html("");
             var _html="";
-            var _account=_init_chat_windows._currentUser.account;
-            $.each(GLOBAL.userPageInfo,function (i, idata) {
-                _html+="<div class='user-message-list' dbfield='"+i+"'>";
-                var _message=[];
-                if(idata.hasOwnProperty("hisMessage"))_message=idata.hisMessage;
-                $.each(_message,function (m, mdata) {
-
-                })
-            })
+            var _account=_init_chat_windows._currentUser.hasOwnProperty("account")?_init_chat_windows._currentUser["account"]:_init_chat_windows._currentUser["chanel"];
+            var _message=[];
+            if(GLOBAL.hismessage.hasOwnProperty(_account))_message=GLOBAL.hismessage[_account];
+            $.each(_message,function (m, mdata) {
+                _html+="<div class='user-message-list'>";
+                var _url=$("[userId='"+mdata.account+"']").find("img").attr("src");
+                var _img="<img src='"+_url+"' style='width: 2em;height:2em;margin:.5em;'>";
+                var _msg="<div class='message-box'><div class='message'>"+mdata.message+"</div><div></div></div>";
+                _html+=(mdata.account==_account)?(_msg+_img):(_img+_msg);
+                _html+="</div>";
+            });
+            _scope.html(_html);
         },
         _init_message_cotent:function () {
 
@@ -472,10 +504,24 @@ var _init_chat_windows={
     _window_right_toolbar:{},
     /***********聊天窗口右部底部内容**********/
     _window_right_footer:{
-        _init_send_message:function (_message) {
+        _init_send_message:function () {
+            var _key=_init_chat_windows._currentUser.hasOwnProperty("account")?_init_chat_windows._currentUser.account:_init_chat_windows._currentUser.chanel;
+            var _message={
+                "account":_init_login._userInfo.account,
+                "message":$("#message-text-content").val()
+            };
             GLOBAL.goEasy.publish ({
-                channel: 'weChat',
-                message: _message
+                channel: _init_chat_windows._currentUser.chanel,
+                message: JSON.stringify(_message),
+                onSuccess:function(){
+                    console.log(JSON.stringify(_message));
+                    if(!GLOBAL.hismessage.hasOwnProperty(_key))GLOBAL.hismessage[_key]=[];
+                    GLOBAL.hismessage[_key].push(_message)
+                },
+                onFailed: function (error) {
+                    var _code=error.code;
+                    console.log("消息发送失败，错误编码："+error.code+" 错误信息："+error.content);
+                }
             });
         }
     }
