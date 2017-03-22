@@ -515,6 +515,7 @@ var _init_chat_windows={
                 message: JSON.stringify(_message),
                 onSuccess:function(){
                     console.log(JSON.stringify(_message));
+                    $("#message-text-content").val("");
                     if(!GLOBAL.hismessage.hasOwnProperty(_key))GLOBAL.hismessage[_key]=[];
                     GLOBAL.hismessage[_key].push(_message)
                 },
